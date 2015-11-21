@@ -2,6 +2,7 @@ package gameTests;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import gamePlay.GameEngine;
 import junit.framework.TestCase;
 
 public class PlayerGameStateTests extends TestCase {
@@ -20,11 +21,11 @@ private final int TEST_RUNS=200;
 			int preQuestions = engine.getQuestionsLeft();
 			if (engine.askQuestion()) {
 				assertEquals(preLocation + 1, engine.getPlayer().getLocation());
-				assertEquals(preQuestions - 1, engine.getPlayer().getQuestionsLeft();
+				assertEquals(preQuestions - 1, engine.getQuestionsLeft());
 			}
 			else {
 				assertEquals(preLocation, engine.getPlayer().getLocation());
-				assertEquals(preQuestions - 1, engine.getPlayer().getQuestionsLeft();
+				assertEquals(preQuestions - 1, engine.getQuestionsLeft());
 			}
 		
 		}
