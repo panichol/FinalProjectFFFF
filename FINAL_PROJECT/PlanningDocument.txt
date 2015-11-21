@@ -1,0 +1,22 @@
+Planning Document 
+
+(a) testing strategy 
+
+Test question propogation to user
+Test correct answer
+Test that correct/incorrect answer cues the right response (correct! moves to next question immediately
+															incorrect! explains why, then moves to next)
+
+Test timer functionality (taking too long to answer->die; answering too many incorrectly->die; answering
+							enough correct->success)
+Test random selection of questions
+
+(b) your development strategy (not in order)
+1) Writing questions (will be read in as input file)
+2) Logic for testing challenge answer system and for calculating end result/next steps
+3) Make fraction class
+4) GUI development
+5) Question class to store question data read in from file
+6) Timer 
+7) Game control enum (0,1,2 correspond to game over, game won, game in play)
+
