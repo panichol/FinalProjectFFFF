@@ -1,8 +1,12 @@
 package gamePlay;
 
+import java.util.ArrayList;
+
 public class GameEngine {
 	private int questionsLeft;
 	private Player player;
+	private Fraction playerFraction;
+	private ArrayList<Question> question;
 	
 	public GameEngine() {
 		player = new Player();

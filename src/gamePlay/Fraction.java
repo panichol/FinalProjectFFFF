@@ -3,6 +3,16 @@ package gamePlay;
 public class Fraction {
 	private int numerator;
 	private int denominator;
+	
+	public Fraction(){
+		this.numerator = 0;
+		this.denominator = 0;
+	}
+	public Fraction(int i, int j){
+		this.numerator = i;
+		this.denominator = j;
+	}
+	
 	public int getNumerator(){
 		return numerator;
 	}
