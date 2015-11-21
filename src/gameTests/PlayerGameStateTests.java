@@ -17,14 +17,14 @@ private final int TEST_RUNS=200;
 	@Test
 	public void testQuestionResult(){
 		for (int i=0; i < TEST_RUNS; i++) {
-			int preLocation = engine.getPlayer().getLocation();
+			int preLives = engine.getPlayer().getLocation();
 			int preQuestions = engine.getQuestionsLeft();
 			if (engine.askQuestion()) {
-				assertEquals(preLocation + 1, engine.getPlayer().getLocation());
+				assertEquals(preLives, engine.getPlayer().getLivesRemaining());
 				assertEquals(preQuestions - 1, engine.getQuestionsLeft());
 			}
 			else {
-				assertEquals(preLocation, engine.getPlayer().getLocation());
+				assertEquals(preLives - 1, engine.getPlayer().getLivesRemaining());
 				assertEquals(preQuestions - 1, engine.getQuestionsLeft());
 			}
 		
