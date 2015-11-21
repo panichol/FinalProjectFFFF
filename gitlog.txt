@@ -1,0 +1,66 @@
+* Added the timer to the GameEngine.
+*   Merge branch 'master' of https://github.com/panichol/FinalProjectFFFF
+|\  
+| * Slight changes in gameEngine
+| *   Merge branch 'master' of https://github.com/panichol/FinalProjectFFFF
+| |\  
+| | *   Merge branch 'master' of https://github.com/panichol/FinalProjectFFFF
+| | |\  
+| | | *   Merge branch 'master' of https://github.com/panichol/FinalProjectFFFF
+| | | |\  
+| | | * | Implemented skeleton gameGUI class
+| | * | | Added a test for question selection, and equals methods for fraction class and question class
+| * | | | Added test to test random ordering of correct answer and false answers.
+| | |_|/  
+| |/| |   
+| * | | Finished Question Answer Tests
+| | |/  
+| |/|   
+| * |   Updated for push
+| |\ \  
+| | |/  
+| | * Modified gameEngine file
+| | * Added question test class and question class.
+| | * Added question test class and question class.
+| * | Implemented question result checking tests
+| * |   Merge branch 'master' of https://github.com/panichol/FinalProjectFFFF
+| |\ \  
+| | |/  
+| | *   Merge branch 'master' of https://github.com/panichol/FinalProjectFFFF
+| | |\  
+| | * | Created a skeleton gameEngine class git push origin master q :q
+| | * |   Merge branch 'master' of https://github.com/panichol/FinalProjectFFFF
+| | |\ \  
+| | * | | Commiting for a pull
+| * | | | added question result tests
+| | |_|/  
+| |/| |   
+* | | | Added the timer class bones and timer tests
+|/ / /  
+* | | Added GameOver ENUM
+* | |   Merge branch 'master' of https://github.com/panichol/FinalProjectFFFF
+|\ \ \  
+| | |/  
+| |/|   
+| * | Update
+| |/  
+* | Added GameOver ENUM
+|/  
+*   Merge branch 'master' of https://github.com/panichol/FinalProjectFFFF
+|\  
+| *   Merge branch 'master' of https://github.com/panichol/FinalProjectFFFF
+| |\  
+| * | Renamed test package to gameTests.
+* | | Added skeleton Fraction Class
+| |/  
+|/|   
+* | Added project plan
+|/  
+* Creating test classes
+* Creating test classes
+*   commiting conflict resolutions
+|\  
+| * Delete .gitignore.txt
+* | Added a .gitignore that actually works
+|/  
+* Initilizing the project
