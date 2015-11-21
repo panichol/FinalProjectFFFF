@@ -6,7 +6,7 @@ public class GameEngine {
 	private int questionsLeft;
 	private Player player;
 	private Fraction playerFraction;
-	private ArrayList<Question> question;
+	private ArrayList<Question> questions;
 	private Fraction playerAnswer;
 	
 	
@@ -31,5 +31,15 @@ public class GameEngine {
 
 	public Player getPlayer() {
 		return player;
+	}
+
+	public void setQuestionsArray(ArrayList<Question> questions) {
+		this.questions = questions;
+		
+	}
+
+	public Question getQuestion() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

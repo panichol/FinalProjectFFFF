@@ -28,4 +28,7 @@ public class Fraction {
 	public void reduce(){
 		
 	}	
+	public boolean equals(Fraction other){
+		return numerator == other.numerator && denominator == other.denominator;
+	}
 }
