@@ -1,4 +1,4 @@
-package gamePackage;
+package gamePlay;
 
 public class Fraction {
 	private int numerator;
