@@ -9,6 +9,7 @@ public class GameEngine {
 	private ArrayList<Question> question;
 	private Fraction playerAnswer;
 	
+	
 	public GameEngine() {
 		player = new Player();
 		questionsLeft = 10;
