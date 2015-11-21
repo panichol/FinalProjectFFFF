@@ -10,12 +10,12 @@ import org.junit.Test;
 
 import gamePlay.*;
 
-//This test is seperate because it requires waiting. And no one wants to wait when running all their tests. 
+//This test is separate because it requires waiting. And no one wants to wait when running all their tests. 
 public class GameTimerTests {
 	public static boolean listenerRan = false; //For testing the listener.
 	
-	@Test				//Needs the throw for the TimeUnit parts. 
-	public void Timer() throws InterruptedException {
+	@Test
+	public void Timer() throws InterruptedException { //Needs the throw for the TimeUnit parts. 
 		
 		//Test listener that for testing. 
 		class testListener implements ActionListener {

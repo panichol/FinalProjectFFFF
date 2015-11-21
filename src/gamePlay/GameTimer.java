@@ -40,12 +40,4 @@ public class GameTimer {
 	public long getTime() {
 		return timeLeft;
 	}
-	
-	//TODO add to game engine instead of in GameTimer. 
-	//This is the listener that will activate upon timer completion
-	class CountdownTimerListener implements ActionListener {
-		public void actionPerformed(ActionEvent e) {
-			//http://stackoverflow.com/questions/9721066/how-to-display-java-timer-on-a-separate-j-frame-form-label
-		}
-	}
 }
