@@ -5,7 +5,7 @@ Planning Document
 Test question propogation to user
 Test correct answer
 Test that correct/incorrect answer cues the right response (correct! moves to next question immediately
-															incorrect! explains why, then moves to next)
+incorrect! explains why, then moves to next)
 
 Test timer functionality (taking too long to answer->die; answering too many incorrectly->die; answering
 							enough correct->success)
@@ -20,3 +20,4 @@ Test random selection of questions
 6) Timer 
 7) Game control enum (0,1,2 correspond to game over, game won, game in play)
 
+//Test that questions are selected randomly and that the answers are ordered randomly
