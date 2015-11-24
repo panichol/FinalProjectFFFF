@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class Question {
+	String question;
 	Fraction correctAnswer;
 	Fraction falseAnswer1;
 	Fraction falseAnswer2;
@@ -22,7 +23,8 @@ public class Question {
 		sequencedAnswers.add(falseAnswer3);
 		
 	}
-	public Question(Fraction correctAnswer,	Fraction falseAnswer1,	Fraction falseAnswer2,Fraction falseAnswer3){
+	public Question(String question, Fraction correctAnswer,Fraction falseAnswer1,Fraction falseAnswer2,Fraction falseAnswer3){
+		this.question = question;
 		this.correctAnswer = correctAnswer;
 		this.falseAnswer1 = falseAnswer1;
 		this.falseAnswer2 = falseAnswer2;
@@ -38,9 +40,8 @@ public class Question {
 		Collections.shuffle(sequencedAnswers);
 		return sequencedAnswers;
 	}
-	public boolean equals(Fraction other){//TODO Does this need to be made?
-		
-		return false;
+	public boolean equals(Question other){//returns true if the question and its answer are the same
+		return question.equals(other.question)&&correctAnswer.equals(other.correctAnswer);
 		
 	}
 }
