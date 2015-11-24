@@ -11,6 +11,7 @@ public class GameEngine {
 	private ArrayList<Question> questions;
 	private Fraction playerAnswer;
 	private GameTimer timer;
+	private GameGUI gui;
 	
 	public GameEngine() {
 		player = new Player();
@@ -24,7 +25,7 @@ public class GameEngine {
 	}
 
 	public boolean askQuestion(){//asks the player a question , and returns whether or not they got it right
-		
+
 		return false;//return whether or not the player got the question right
 	}
 	
@@ -51,5 +52,9 @@ public class GameEngine {
 	public Question getQuestion() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	public void main(String args[]) {
+		
 	}
 }
