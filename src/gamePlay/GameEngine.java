@@ -16,15 +16,15 @@ public class GameEngine {
 	//Timer variables
 	private Timer timer;		//The timer object. Can pause, start, and stop. Stops when out of time. 
 	private int timeLeft;			//The time left for the question.
-	private int timeStart;			//The time that the timer will start at when reset.
+	private int startTime;			//The time that the timer will start at when reset.
 	public boolean timeRemaining;	//True for has time, false if out of time.
 
 	public GameEngine() {
 		player = new Player();
 		questionsLeft = 10;
 		playerAnswer = new Fraction();
-		timeStart = 10;
-		timeLeft = timeStart;
+		startTime = 10;
+		timeLeft = startTime;
 		timeRemaining = true;
 		timer = new Timer(1000, new TimerListener());
 	}
@@ -57,7 +57,11 @@ public class GameEngine {
 	}
 
 	//------------TIMER FUNCTIONS----------------//
-	//This is the listener that will activate upon timer completion
+	/**
+	 * This is the listener that will activate upon timer completion
+	 * Not that the actual javax.swing.Timer is not a timer in the general sense. 
+	 * What it does is it calls this action listener ever second. So it updates timeLeft which is the "timer" in the general sense. 
+	 */
 	public class TimerListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			//http://stackoverflow.com/questions/9721066/how-to-display-java-timer-on-a-separate-j-frame-form-label
@@ -68,40 +72,60 @@ public class GameEngine {
 			}
 			else {
 				//TODO what happens when the time is up here.
-				stop();
+				resetTimer();
 			}
 		}
 	}
 
-	//Start the timer from current time left 
+	/**
+	 * Start the timer from current time left 
+	 */
 	public void startTimer() {
 		timer.start();
 	}
-	//Pauses the timer. Does not reset time left
+	/**
+	 * Pauses the timer. Does not reset time left
+	 */
 	public void pauseTimer() {
 		timer.stop();
 	}
-	//Reset timer to timeStart value
+	/**
+	 * Reset timer to timeStart value
+	 */
 	public void resetTimer() {
-		timeLeft = timeStart;
+		timeLeft = startTime;
 	}
-	//Returns the time that you have left for the problem
+	/**
+	 * Returns the time that you have left for the problem
+	 * 
+	 * @return time left to finish question.
+	 */
 	public int getTime() {
 		return timeLeft;
 	}
-	//Stops the timer, resets timer, but does not start timer again
+	/**
+	 * Stops the timer, resets timer, but does not start timer again
+	 */
 	public void stop() {
 		timer.stop();
 		timer.restart();
 		timer.stop();
 	}
-	//Change the amount of time the player has
+	/**
+	 * Change the amount of time the player has
+	 * 
+	 * @param time Change the starting time to time.
+	 */
 	public void changeStartTime(int time)
 	{
-		timeStart = time;
+		startTime = time;
 	}
-	//Get the amount of time the player has
+	/**
+	 * Get the amount of time the player has
+	 * 
+	 * @return timeStart
+	 */
 	public int getStartTime() {
-		return timeStart;
+		return startTime;
 	}
 }
