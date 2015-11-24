@@ -16,7 +16,14 @@ public class GameEngine {
 	private Fraction playerFraction;
 	private ArrayList<Question> questions;
 	private Fraction playerAnswer;
+	private GameGUI gui;
 	
+	//Timer variables
+	private Timer timer;		//The timer object. Can pause, start, and stop. Stops when out of time. 
+	private int timeLeft;			//The time left for the question.
+	private int timeStart;			//The time that the timer will start at when reset.
+	public boolean timeRemaining;	//True for has time, false if out of time.
+
 	public GameEngine() {
 		player = new Player();
 		questionsLeft = 10;
@@ -90,13 +97,7 @@ public class GameEngine {
 			throw ex;
 		}
 	}
-	//Timer variables
-	private Timer timer;		//The timer object. Can pause, start, and stop. Stops when out of time. 
-	private int timeLeft;			//The time left for the question.
-	private int timeStart;			//The time that the timer will start at when reset.
-	public boolean timeRemaining;	//True for has time, false if out of time.
 
-	
 	public Fraction getPlayerAnswer() {
 		return playerAnswer;
 	}
@@ -171,5 +172,9 @@ public class GameEngine {
 	//Get the amount of time the player has
 	public int getStartTime() {
 		return timeStart;
+	}
+	
+	public void main(String args[]) {
+		
 	}
 }
