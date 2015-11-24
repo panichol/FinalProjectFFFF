@@ -1,6 +1,11 @@
 package gamePlay;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.ArrayList;
+
+import java.util.Scanner;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -30,6 +35,24 @@ public class Question {
 		this.falseAnswer2 = falseAnswer2;
 		this.falseAnswer3  = falseAnswer3;
 	}
+	
+	public void loadQuestionFile(String fileName) throws FileNotFoundException{
+		FileReader reader = new FileReader(fileName);
+			Scanner in = new Scanner(reader);
+			int numQuestions = Integer.parseInt(in.nextLine());
+			for (int i = 0; i < numQuestions; i++){
+				if (in.hasNextLine()){
+					String a = in.nextLine();
+					
+					a = in.nextLine();
+					a = in.nextLine();
+					a = in.nextLine();
+					a = in.nextLine();
+
+				}
+			}
+	}
+
 	public Fraction getCorrectAnswer() {
 		return correctAnswer;
 	}
