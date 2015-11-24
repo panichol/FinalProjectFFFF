@@ -3,6 +3,7 @@ package gamePlay;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class GameEngine {
 	private int questionsLeft;
@@ -48,8 +49,8 @@ public class GameEngine {
 		
 	}
 
-	public Question getQuestion() {
-		// TODO Auto-generated method stub
-		return null;
+	public Question getQuestion() {//TODO he questions list should be shuffled when it is loaded in
+		Collections.rotate(questions, 1);
+		return questions.get(1);
 	}
 }
