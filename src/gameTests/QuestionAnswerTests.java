@@ -11,7 +11,7 @@ import org.junit.BeforeClass;
 
 public class QuestionAnswerTests extends TestCase {
 	GameEngine newGame;
-	
+	 
 	@BeforeClass
 	public void setUp() {
 		newGame = new GameEngine();
