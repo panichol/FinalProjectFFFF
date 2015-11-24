@@ -21,19 +21,23 @@ public class GameEngineTests {
 		Fraction false1 = new Fraction(3, 4);
 		Fraction false2 = new Fraction(3, 4);
 		Fraction false3 = new Fraction(3, 4);
-		Question q1 = new Question("", answer, false1, false2, false3);
+		Question q1 = new Question("Is this question 1?",answer, false1, false2, false3);
 		questions.add(q1);
-		answer = new Fraction(1, 2);
+		answer = new Fraction(1, 3);
 		false1 = new Fraction(3, 4);
 		false2 = new Fraction(3, 4);
 		false3 = new Fraction(3, 4);
-		Question q2 = new Question("", answer, false1, false2, false3);
+		Question q2 = new Question("Is this question 2?",answer, false1, false2, false3);
+
 		questions.add(q2);
-		answer = new Fraction(1, 2);
+		answer = new Fraction(1, 4);
 		false1 = new Fraction(3, 4);
 		false2 = new Fraction(3, 4);
 		false3 = new Fraction(3, 4);
-		Question q3 = new Question("", answer, false1, false2, false3);
+
+
+		Question q3 = new Question("Is this question 3?",answer, false1, false2, false3);
+
 		questions.add(q3);
 		GameEngine control = new GameEngine();
 		control.setQuestionsArray(questions);

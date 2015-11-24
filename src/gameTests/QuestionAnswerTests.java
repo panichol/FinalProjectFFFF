@@ -30,7 +30,8 @@ public class QuestionAnswerTests extends TestCase {
 		Fraction false1 = new Fraction(3, 4);
 		Fraction false2 = new Fraction(3, 4);
 		Fraction false3 = new Fraction(3, 4);
-		Question q1 = new Question("", answer, false1, false2, false3);
+		Question q1 = new Question("",answer, false1, false2, false3);
+
 				
 		assertTrue (q1.isCorrect(newGame.getPlayerAnswer()));		//checks that if user selects answer 
 		assertFalse(q1.isCorrect(newGame.getPlayerAnswer()));
@@ -44,7 +45,9 @@ public class QuestionAnswerTests extends TestCase {
 		Fraction false1 = new Fraction(3, 4);
 		Fraction false2 = new Fraction(3, 4);
 		Fraction false3 = new Fraction(3, 4);
-		Question q1 = new Question("", answer, false1, false2, false3);
+
+		Question q1 = new Question("",answer, false1, false2, false3);
+
 		
 		int countAnswersAtIndex0 = 0;
 		for (int i = 0; i < 1000; i++){

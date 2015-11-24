@@ -26,7 +26,7 @@ public class Question {
 		sequencedAnswers.add(falseAnswer1);
 		sequencedAnswers.add(falseAnswer2);
 		sequencedAnswers.add(falseAnswer3);
-		
+
 	}
 	public Question(String question, Fraction correctAnswer,Fraction falseAnswer1,Fraction falseAnswer2,Fraction falseAnswer3){
 		this.question = question;
