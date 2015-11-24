@@ -1,19 +1,26 @@
 package gamePlay;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class Question {
 	Fraction correctAnswer;
 	Fraction falseAnswer1;
 	Fraction falseAnswer2;
 	Fraction falseAnswer3;
-	Fraction[] sequencedAnswers;
+	ArrayList<Fraction> sequencedAnswers;
 	public Question(){
 		correctAnswer = new Fraction();
 		falseAnswer1 = new Fraction();
 		falseAnswer2 = new Fraction();
 		falseAnswer3  = new Fraction();
-		sequencedAnswers = new Fraction[]{correctAnswer, falseAnswer1, falseAnswer2, falseAnswer3};
+		sequencedAnswers = new ArrayList<Fraction>();
+		sequencedAnswers.add(correctAnswer);
+		sequencedAnswers.add(falseAnswer1);
+		sequencedAnswers.add(falseAnswer2);
+		sequencedAnswers.add(falseAnswer3);
+		
 	}
 	public Question(Fraction correctAnswer,	Fraction falseAnswer1,	Fraction falseAnswer2,Fraction falseAnswer3){
 		this.correctAnswer = correctAnswer;
@@ -27,13 +34,13 @@ public class Question {
 	public boolean isCorrect(Fraction input){
 		return input == correctAnswer;
 	}
-	public Fraction[] orderAnswers(){
-//		Boolean[] otherList = new Boolean[] {false, false, false, false};
-		for (int i = 0; i < 4; i++){
-			int rand = (int) (Math.random() % 4);
-
-		}
-		
+	public ArrayList<Fraction> orderAnswers(){
+		Collections.shuffle(sequencedAnswers);
 		return sequencedAnswers;
+	}
+	public boolean equals(Fraction other){//TODO Does this need to be made?
+		
+		return false;
+		
 	}
 }

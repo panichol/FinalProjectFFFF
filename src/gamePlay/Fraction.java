@@ -3,7 +3,7 @@ package gamePlay;
 public class Fraction {
 	private int numerator;
 	private int denominator;
-	
+
 	public Fraction(){
 		this.numerator = 0;
 		this.denominator = 0;
@@ -12,7 +12,7 @@ public class Fraction {
 		this.numerator = i;
 		this.denominator = j;
 	}
-	
+
 	public int getNumerator(){
 		return numerator;
 	}
@@ -26,7 +26,7 @@ public class Fraction {
 		this.denominator = denominator;
 	}
 	public void reduce(){
-		
+
 	}	
 	public boolean equals(Fraction other){
 		return numerator == other.numerator && denominator == other.denominator;
