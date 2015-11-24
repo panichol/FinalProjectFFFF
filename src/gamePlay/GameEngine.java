@@ -2,7 +2,10 @@ package gamePlay;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.Collections;
 
 import javax.swing.Timer;
@@ -13,6 +16,8 @@ public class GameEngine {
 	private Fraction playerFraction;
 	private ArrayList<Question> questions;
 	private Fraction playerAnswer;
+	private GameGUI gui;
+	
 	//Timer variables
 	private Timer timer;		//The timer object. Can pause, start, and stop. Stops when out of time. 
 	private int timeLeft;			//The time left for the question.
@@ -27,6 +32,70 @@ public class GameEngine {
 		timeLeft = startTime;
 		timeRemaining = true;
 		timer = new Timer(1000, new TimerListener());
+	}
+	
+	public void loadQuestionFile(String fileName) throws BadFormatException{
+		try{
+			FileReader reader = new FileReader(fileName);
+			Scanner in = new Scanner(reader);
+			int numQuestions = Integer.parseInt(in.nextLine());
+			Question q = new Question();
+			Fraction f = new Fraction();
+			char a1, a2;
+			int countLines = 0;
+			for (int i = 0; i < numQuestions; i++){
+				if (in.hasNextLine()){
+					String a = in.nextLine();
+					countLines++;
+					q.setQuestion(a);
+					
+					a = in.nextLine();
+					countLines++;
+					a1 = a.charAt(0);
+					a2 = a.charAt(2);
+					f.setNumerator(a1);
+					f.setDenominator(a2);
+					q.setCorrectAnswer(f);
+
+					a = in.nextLine();
+					countLines++;
+					a1 = a.charAt(0);
+					a2 = a.charAt(2);
+					f.setNumerator(a1);
+					f.setDenominator(a2);
+					q.setFalseAnswer1(f);
+
+					a = in.nextLine();
+					countLines++;
+					a1 = a.charAt(0);
+					a2 = a.charAt(2);
+					f.setNumerator(a1);
+					f.setDenominator(a2);
+					q.setFalseAnswer2(f);
+
+					a = in.nextLine();
+					countLines++;
+					a1 = a.charAt(0);
+					a2 = a.charAt(2);
+					f.setNumerator(a1);
+					f.setDenominator(a2);
+					q.setFalseAnswer3(f);
+					if (countLines != 5){
+						throw new BadFormatException("Incorrect number of lines in question.");
+					}
+					else{
+						questions.add(q);
+					}
+				}
+			}
+		}
+		catch (FileNotFoundException fnfe) {
+				System.out.println("File not found.");
+		}
+		catch (BadFormatException bfe) {
+			BadFormatException ex = new BadFormatException(bfe.getMessage());
+			throw ex;
+		}
 	}
 
 	public Fraction getPlayerAnswer() {
@@ -127,5 +196,9 @@ public class GameEngine {
 	 */
 	public int getStartTime() {
 		return startTime;
+	}
+	
+	public void main(String args[]) {
+		
 	}
 }
