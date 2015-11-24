@@ -1,7 +1,10 @@
 package gameTests;
+import java.io.FileNotFoundException;
+
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import gamePlay.BadFormatException;
 import gamePlay.GameEngine;
 import junit.framework.TestCase;
 
@@ -10,7 +13,7 @@ private static GameEngine engine;
 private final int TEST_RUNS=200;
 	
 	@BeforeClass
-	public void setUp() {
+	public void setUp() throws BadFormatException {
 		engine = new GameEngine();
 	}
 	

@@ -2,10 +2,12 @@ package gameTests;
 import junit.framework.TestCase;
 import static org.junit.Assert.*;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 import org.junit.Test;
 
+import gamePlay.BadFormatException;
 import gamePlay.Fraction;
 import gamePlay.GameEngine;
 import gamePlay.Question;
@@ -16,7 +18,7 @@ public class QuestionAnswerTests extends TestCase {
 	GameEngine newGame;
 	
 	@BeforeClass
-	public void setUp() {
+	public void setUp() throws BadFormatException {
 		newGame = new GameEngine();
 	}
 	
