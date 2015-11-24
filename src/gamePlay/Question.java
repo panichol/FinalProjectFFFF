@@ -10,11 +10,11 @@ import java.util.Collections;
 import java.util.List;
 
 public class Question {
-	String question;
-	Fraction correctAnswer;
-	Fraction falseAnswer1;
-	Fraction falseAnswer2;
-	Fraction falseAnswer3;
+	private String question;
+	private Fraction correctAnswer;
+	private Fraction falseAnswer1;
+	private Fraction falseAnswer2;
+	private Fraction falseAnswer3;
 	ArrayList<Fraction> sequencedAnswers;
 	public Question(){
 		correctAnswer = new Fraction();
@@ -36,22 +36,7 @@ public class Question {
 		this.falseAnswer3  = falseAnswer3;
 	}
 	
-	public void loadQuestionFile(String fileName) throws FileNotFoundException{
-		FileReader reader = new FileReader(fileName);
-			Scanner in = new Scanner(reader);
-			int numQuestions = Integer.parseInt(in.nextLine());
-			for (int i = 0; i < numQuestions; i++){
-				if (in.hasNextLine()){
-					String a = in.nextLine();
-					
-					a = in.nextLine();
-					a = in.nextLine();
-					a = in.nextLine();
-					a = in.nextLine();
-
-				}
-			}
-	}
+	
 
 	public Fraction getCorrectAnswer() {
 		return correctAnswer;
@@ -66,5 +51,33 @@ public class Question {
 	public boolean equals(Question other){//returns true if the question and its answer are the same
 		return question.equals(other.question)&&correctAnswer.equals(other.correctAnswer);
 		
+	}
+	
+	public String getQuestion() {
+		return question;
+	}
+	public void setQuestion(String question) {
+		this.question = question;
+	}
+	public Fraction getFalseAnswer1() {
+		return falseAnswer1;
+	}
+	public void setFalseAnswer1(Fraction falseAnswer1) {
+		this.falseAnswer1 = falseAnswer1;
+	}
+	public Fraction getFalseAnswer2() {
+		return falseAnswer2;
+	}
+	public void setFalseAnswer2(Fraction falseAnswer2) {
+		this.falseAnswer2 = falseAnswer2;
+	}
+	public Fraction getFalseAnswer3() {
+		return falseAnswer3;
+	}
+	public void setFalseAnswer3(Fraction falseAnswer3) {
+		this.falseAnswer3 = falseAnswer3;
+	}
+	public void setCorrectAnswer(Fraction correctAnswer) {
+		this.correctAnswer = correctAnswer;
 	}
 }

@@ -2,7 +2,10 @@ package gamePlay;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class GameEngine {
 	private int questionsLeft;
@@ -12,13 +15,77 @@ public class GameEngine {
 	private Fraction playerAnswer;
 	private GameTimer timer;
 	
-	public GameEngine() {
+	public GameEngine() throws BadFormatException {
 		player = new Player();
 		questionsLeft = 10;
 		playerAnswer = new Fraction();
 		timer = new GameTimer(new TimerListener());
+		loadQuestionFile("input.txt");
 	}
 	
+	public void loadQuestionFile(String fileName) throws BadFormatException{
+		try{
+			FileReader reader = new FileReader(fileName);
+			Scanner in = new Scanner(reader);
+			int numQuestions = Integer.parseInt(in.nextLine());
+			Question q = new Question();
+			Fraction f = new Fraction();
+			char a1, a2;
+			int countLines = 0;
+			for (int i = 0; i < numQuestions; i++){
+				if (in.hasNextLine()){
+					String a = in.nextLine();
+					countLines++;
+					q.setQuestion(a);
+					
+					a = in.nextLine();
+					countLines++;
+					a1 = a.charAt(0);
+					a2 = a.charAt(2);
+					f.setNumerator(a1);
+					f.setDenominator(a2);
+					q.setCorrectAnswer(f);
+
+					a = in.nextLine();
+					countLines++;
+					a1 = a.charAt(0);
+					a2 = a.charAt(2);
+					f.setNumerator(a1);
+					f.setDenominator(a2);
+					q.setFalseAnswer1(f);
+
+					a = in.nextLine();
+					countLines++;
+					a1 = a.charAt(0);
+					a2 = a.charAt(2);
+					f.setNumerator(a1);
+					f.setDenominator(a2);
+					q.setFalseAnswer2(f);
+
+					a = in.nextLine();
+					countLines++;
+					a1 = a.charAt(0);
+					a2 = a.charAt(2);
+					f.setNumerator(a1);
+					f.setDenominator(a2);
+					q.setFalseAnswer3(f);
+					if (countLines != 5){
+						throw new BadFormatException("Incorrect number of lines in question.");
+					}
+					else{
+						questions.add(q);
+					}
+				}
+			}
+		}
+		catch (FileNotFoundException fnfe) {
+				System.out.println("File not found.");
+		}
+		catch (BadFormatException bfe) {
+			BadFormatException ex = new BadFormatException(bfe.getMessage());
+			throw ex;
+		}
+	}
 	public Fraction getPlayerAnswer() {
 		return playerAnswer;
 	}

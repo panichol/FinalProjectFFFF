@@ -2,10 +2,12 @@ package gameTests;
 
 import static org.junit.Assert.*;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 import org.junit.Test;
 
+import gamePlay.BadFormatException;
 import gamePlay.Fraction;
 import gamePlay.GameEngine;
 import gamePlay.Question;
@@ -13,25 +15,25 @@ import gamePlay.Question;
 public class GameEngineTests {
 
 	@Test
-	public void randomAnswerSelectionTest(){
+	public void randomAnswerSelectionTest() throws BadFormatException{
 		ArrayList<Question> questions = new ArrayList<Question>();
 		Fraction answer = new Fraction(1, 2);
 		Fraction false1 = new Fraction(3, 4);
 		Fraction false2 = new Fraction(3, 4);
 		Fraction false3 = new Fraction(3, 4);
-		Question q1 = new Question(answer, false1, false2, false3);
+		Question q1 = new Question("", answer, false1, false2, false3);
 		questions.add(q1);
 		answer = new Fraction(1, 2);
 		false1 = new Fraction(3, 4);
 		false2 = new Fraction(3, 4);
 		false3 = new Fraction(3, 4);
-		Question q2 = new Question(answer, false1, false2, false3);
+		Question q2 = new Question("", answer, false1, false2, false3);
 		questions.add(q2);
 		answer = new Fraction(1, 2);
 		false1 = new Fraction(3, 4);
 		false2 = new Fraction(3, 4);
 		false3 = new Fraction(3, 4);
-		Question q3 = new Question(answer, false1, false2, false3);
+		Question q3 = new Question("", answer, false1, false2, false3);
 		questions.add(q3);
 		GameEngine control = new GameEngine();
 		control.setQuestionsArray(questions);
