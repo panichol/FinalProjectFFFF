@@ -2,9 +2,13 @@ package gamePlay;
 
 import java.awt.GraphicsConfiguration;
 import java.awt.HeadlessException;
+import java.util.ArrayList;
 
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 public class GameGUI extends JFrame {
@@ -12,34 +16,76 @@ public class GameGUI extends JFrame {
 	private JPanel questionPanel;
 	private JPanel playerStatus;
 	private JTextField timeDisp;
-	private JTextField questiondisp;
+	private JTextField questionDisp;
 	private JTextField livesDisp;
+	private ArrayList<JRadioButton> buttons;
 
-	public GameGUI() {
+	public GameGUI(Player player) {
+		buttons = new ArrayList<JRadioButton>();
+		for (int i=0; i < 4; i++) {
+			buttons.add(new JRadioButton());
+		}
+		
 		timeDisp = new JTextField(20);
-		questiondisp = new JTextField(20);
+		timeDisp.setEnabled(false);
+		
+		questionDisp = new JTextField(20);
+		questionDisp.setEnabled(false);
+		
 		livesDisp = new JTextField(5);
-		graphicsPanel = createGraphicsPanel();
+		livesDisp.setEnabled(false);
+		
+		graphicsPanel = createGraphicsPanel(player);
+		add(graphicsPanel);
 		questionPanel = createQuestionPanel();
-		playerStatus = createPlayerStatusPanel();
+		add(questionPanel);
+		playerStatus = createPlayerStatusPanel(player);
+		add(playerStatus);
 	}
 
-	private JPanel createGraphicsPanel() {
+	private JPanel createGraphicsPanel(Player player) {
 		return null;
 	}
 
 	private JPanel createQuestionPanel() {
+		JPanel qPanel = new JPanel();
+		ButtonGroup group = new ButtonGroup();
+		
+		qPanel.add(questionDisp);
+		
+		for (JRadioButton button : buttons) {
+			group.add(button);
+			qPanel.add(button);
+		}
+		
+		JButton submit = new JButton("Submit");
+		qPanel.add(submit);
+
+		return qPanel;
+	}
+
+	private JPanel createPlayerStatusPanel(Player player) {
 		return null;
 	}
 
-	private JPanel createPlayerStatusPanel() {
-		return null;
+	public void updateTime(int time) {
+		timeDisp.setText(Integer.toString(time));		
+		repaint();
 	}
-
-	public void update(int time, int lives, Question question) {
-		timeDisp.setText(Integer.toString(time));
-		//questionDisp.setText(question string junk stuff); /************TODO - after question implemented more*/
+	
+	public void updateLives(int lives) {
 		livesDisp.setText(Integer.toString(lives));
+		repaint();
+	}
+	
+	public void updateQuestion(Question question) {
+		//questionDisp.setText(question.get some string stuff);
+		repaint();
+	}
+	
+	public void updateStatus(Player player) {
+		//Update Location, or death
+		repaint();
 	}
 
 }
