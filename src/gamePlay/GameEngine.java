@@ -32,6 +32,7 @@ public class GameEngine {
 		timeLeft = startTime;
 		timeRemaining = true;
 		timer = new Timer(1000, new TimerListener());
+		gui = new GameGUI();
 	}
 	
 	public void loadQuestionFile(String fileName) throws BadFormatException{
@@ -198,7 +199,8 @@ public class GameEngine {
 		return startTime;
 	}
 	
-	public void main(String args[]) {
-		
+	public static void main(String args[]) {
+		GameEngine game = new GameEngine();
+		game.gui.setVisible(true);
 	}
 }
