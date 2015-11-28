@@ -1,12 +1,14 @@
 package gamePlay;
 
 import java.awt.GraphicsConfiguration;
+import java.awt.GridLayout;
 import java.awt.HeadlessException;
 import java.util.ArrayList;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
@@ -20,7 +22,8 @@ public class GameGUI extends JFrame {
 	private JTextField livesDisp;
 	private ArrayList<JRadioButton> buttons;
 
-	public GameGUI(Player player) {
+	public GameGUI() {
+		setSize(600,800);
 		buttons = new ArrayList<JRadioButton>();
 		for (int i=0; i < 4; i++) {
 			buttons.add(new JRadioButton());
@@ -35,20 +38,21 @@ public class GameGUI extends JFrame {
 		livesDisp = new JTextField(5);
 		livesDisp.setEnabled(false);
 		
-		graphicsPanel = createGraphicsPanel(player);
-		add(graphicsPanel);
+		//graphicsPanel = createGraphicsPanel();
+		//add(graphicsPanel);
 		questionPanel = createQuestionPanel();
 		add(questionPanel);
-		playerStatus = createPlayerStatusPanel(player);
-		add(playerStatus);
+		//playerStatus = createPlayerStatusPanel();
+		//add(playerStatus);
 	}
 
-	private JPanel createGraphicsPanel(Player player) {
+	private JPanel createGraphicsPanel() {
 		return null;
 	}
 
 	private JPanel createQuestionPanel() {
 		JPanel qPanel = new JPanel();
+		qPanel.setLayout(new GridLayout(0,1));
 		ButtonGroup group = new ButtonGroup();
 		
 		qPanel.add(questionDisp);
@@ -64,7 +68,7 @@ public class GameGUI extends JFrame {
 		return qPanel;
 	}
 
-	private JPanel createPlayerStatusPanel(Player player) {
+	private JPanel createPlayerStatusPanel() {
 		return null;
 	}
 
@@ -73,18 +77,26 @@ public class GameGUI extends JFrame {
 		repaint();
 	}
 	
-	public void updateLives(int lives) {
-		livesDisp.setText(Integer.toString(lives));
-		repaint();
-	}
-	
 	public void updateQuestion(Question question) {
-		//questionDisp.setText(question.get some string stuff);
+		questionDisp.setText(question.getQuestion());
+		int i=0;
+		for (Fraction answer : question.orderAnswers()) {
+			buttons.get(i).setText(answer.toString());
+			i++;
+		}
 		repaint();
 	}
 	
 	public void updateStatus(Player player) {
-		//Update Location, or death
+		// Update Lives and Location, or end game if Player has run out of lives
+		if (player.getLivesRemaining() > 0) {
+			livesDisp.setText(Integer.toString(player.getLivesRemaining()));
+		}
+		else {
+			JOptionPane.showMessageDialog(getParent(), "Sorry, you have run out of lives!"
+					, "Game Over", JOptionPane.INFORMATION_MESSAGE);
+			System.exit(0);
+		}
 		repaint();
 	}
 
