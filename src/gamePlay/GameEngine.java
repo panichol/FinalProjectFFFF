@@ -40,7 +40,11 @@ public class GameEngine {
 		try{
 			FileReader reader = new FileReader(fileName);
 			Scanner in = new Scanner(reader);
-			int numQuestions = Integer.parseInt(in.nextLine());
+			/////////
+			//int numQuestions = Integer.parseInt(in.nextLine());
+			////////
+			int numQuestions = Integer.parseInt("10");
+			in.nextLine();
 			Question q = new Question();
 			Fraction f = new Fraction();
 			int a1;
@@ -54,33 +58,37 @@ public class GameEngine {
 					q.setQuestion(a);
 					
 					a = in.nextLine();
+					String[] input = a.split("/");
 					countLines++;
-					a1 = Character.getNumericValue(a.charAt(0));
-					a2 = Character.getNumericValue(a.charAt(2));
+					a1 = Integer.parseInt(input[0]);
+					a2 = Integer.parseInt(input[1]);
 					f.setNumerator(a1);
 					f.setDenominator(a2);
 					q.setCorrectAnswer(f);
 
 					a = in.nextLine();
+					input = a.split("/");
 					countLines++;
-					a1 = Character.getNumericValue(a.charAt(0));
-					a2 = Character.getNumericValue(a.charAt(2));
+					a1 = Integer.parseInt(input[0]);
+					a2 = Integer.parseInt(input[1]);
 					f.setNumerator(a1);
 					f.setDenominator(a2);
 					q.setFalseAnswer1(f);
 
 					a = in.nextLine();
+					input = a.split("/");
 					countLines++;
-					a1 = Character.getNumericValue(a.charAt(0));
-					a2 = Character.getNumericValue(a.charAt(2));
+					a1 = Integer.parseInt(input[0]);
+					a2 = Integer.parseInt(input[1]);
 					f.setNumerator(a1);
 					f.setDenominator(a2);
 					q.setFalseAnswer2(f);
 
 					a = in.nextLine();
+					input = a.split("/");
 					countLines++;
-					a1 = Character.getNumericValue(a.charAt(0));
-					a2 = Character.getNumericValue(a.charAt(2));
+					a1 = Integer.parseInt(input[0]);
+					a2 = Integer.parseInt(input[1]);
 					f.setNumerator(a1);
 					f.setDenominator(a2);
 					q.setFalseAnswer3(f);
