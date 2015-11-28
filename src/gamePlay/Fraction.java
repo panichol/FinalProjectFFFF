@@ -8,9 +8,9 @@ public class Fraction {
 		this.numerator = 0;
 		this.denominator = 0;
 	}
-	public Fraction(int i, int j){
-		this.numerator = i;
-		this.denominator = j;
+	public Fraction(int num, int denom){
+		this.numerator = num;
+		this.denominator = denom;
 	}
 	
 	public Fraction(Fraction other){

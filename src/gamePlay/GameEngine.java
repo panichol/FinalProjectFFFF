@@ -33,6 +33,7 @@ public class GameEngine {
 		timeRemaining = true;
 		timer = new Timer(1000, new TimerListener());
 		gui = new GameGUI();
+		questions = new ArrayList<Question>();
 	}
 	
 	public void loadQuestionFile(String fileName) throws BadFormatException{
@@ -41,13 +42,13 @@ public class GameEngine {
 			Scanner in = new Scanner(reader);
 			int numQuestions = Integer.parseInt(in.nextLine());
 			Question q = new Question();
-			System.out.println(q);
 			Fraction f = new Fraction();
 			int a1;
 			int a2;
 			int countLines = 0;
 			for (int i = 0; i < numQuestions; i++){
 				if (in.hasNextLine()){				//TODO Refactor
+					countLines = 0;
 					String a = in.nextLine();
 					countLines++;
 					q.setQuestion(a);
@@ -59,8 +60,6 @@ public class GameEngine {
 					f.setNumerator(a1);
 					f.setDenominator(a2);
 					q.setCorrectAnswer(f);
-					System.out.println(a1);
-					System.out.println(a2);
 
 					a = in.nextLine();
 					countLines++;
@@ -85,14 +84,15 @@ public class GameEngine {
 					f.setNumerator(a1);
 					f.setDenominator(a2);
 					q.setFalseAnswer3(f);
-					System.out.println(q);
+					
 					if (countLines != 5){
 						throw new BadFormatException("Incorrect number of lines in question.");
 					}
 					else{
 						
 						System.out.println("Questions number :" +i);
-						questions.add(q);
+						System.out.println(q);
+						questions.add(new Question(q));
 					}
 				}
 			}

@@ -41,7 +41,19 @@ public class Question {
 		sequencedAnswers.add(falseAnswer3);
 	}
 	
-	
+	public Question(Question other){
+		this.question = other.question;
+		correctAnswer = other.correctAnswer;
+		falseAnswer1 = other.falseAnswer1;
+		falseAnswer2 = other.falseAnswer2;
+		falseAnswer3 = other.falseAnswer3;
+		sequencedAnswers = new ArrayList<Fraction>();
+		sequencedAnswers.add(correctAnswer);
+		sequencedAnswers.add(falseAnswer1);
+		sequencedAnswers.add(falseAnswer2);
+		sequencedAnswers.add(falseAnswer3);
+
+	}
 
 	public Fraction getCorrectAnswer() {
 		return correctAnswer;
