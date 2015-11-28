@@ -45,7 +45,7 @@ public class GameEngine {
 			char a1, a2;
 			int countLines = 0;
 			for (int i = 0; i < numQuestions; i++){
-				if (in.hasNextLine()){
+				if (in.hasNextLine()){				//TODO Refactor
 					String a = in.nextLine();
 					countLines++;
 					q.setQuestion(a);
@@ -85,6 +85,8 @@ public class GameEngine {
 						throw new BadFormatException("Incorrect number of lines in question.");
 					}
 					else{
+						
+						System.out.println("Questions number :" +i);
 						questions.add(q);
 					}
 				}
@@ -114,6 +116,10 @@ public class GameEngine {
 
 	public Player getPlayer() {
 		return player;
+	}
+	
+	public ArrayList<Question> getQuestionsArray(){
+		return questions;
 	}
 
 	public void setQuestionsArray(ArrayList<Question> questions) {
