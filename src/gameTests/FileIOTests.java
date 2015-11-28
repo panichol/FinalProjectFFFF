@@ -43,15 +43,15 @@ public class FileIOTests {
 			f3 = new Fraction(1,3);
 			f4 = new Fraction(7,12);
 			Question q5 = new Question("What is 3/4 - 1/3 equal to?",f1,f2,f3,f4);
-			System.out.println(q5);
-			System.out.println(questions.get(4));
 			assertTrue(q5.equals(questions.get(4)));
 			
 			f1 = new Fraction(15,8);
 			f2 = new Fraction(12,10);
 			f3 = new Fraction(6,5);
 			f4 = new Fraction(8,15);
-			Question q10 = new Question("What is 3/2 ÷ 4/5 equal to?",f1,f2,f3,f4);
+			Question q10 = new Question("What is 3/2 / 4/5 equal to?",f1,f2,f3,f4);
+			System.out.println(q10);
+			System.out.println(questions.get(9));
 			assertTrue(q10.equals(questions.get(9)));
 		}
 		catch (BadFormatException bfe) {
