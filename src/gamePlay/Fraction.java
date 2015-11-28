@@ -12,6 +12,11 @@ public class Fraction {
 		this.numerator = i;
 		this.denominator = j;
 	}
+	
+	public Fraction(Fraction other){
+		this.numerator = other.numerator;
+		this.denominator = other.denominator;
+	}
 
 	public int getNumerator(){
 		return numerator;
@@ -30,5 +35,8 @@ public class Fraction {
 	}	
 	public boolean equals(Fraction other){
 		return numerator == other.numerator && denominator == other.denominator;
+	}
+	public String toString(){
+		return Integer.toString(numerator)+"/"+Integer.toString(denominator);
 	}
 }

@@ -41,8 +41,10 @@ public class GameEngine {
 			Scanner in = new Scanner(reader);
 			int numQuestions = Integer.parseInt(in.nextLine());
 			Question q = new Question();
+			System.out.println(q);
 			Fraction f = new Fraction();
-			char a1, a2;
+			int a1;
+			int a2;
 			int countLines = 0;
 			for (int i = 0; i < numQuestions; i++){
 				if (in.hasNextLine()){				//TODO Refactor
@@ -52,35 +54,38 @@ public class GameEngine {
 					
 					a = in.nextLine();
 					countLines++;
-					a1 = a.charAt(0);
-					a2 = a.charAt(2);
+					a1 = Character.getNumericValue(a.charAt(0));
+					a2 = Character.getNumericValue(a.charAt(2));
 					f.setNumerator(a1);
 					f.setDenominator(a2);
 					q.setCorrectAnswer(f);
+					System.out.println(a1);
+					System.out.println(a2);
 
 					a = in.nextLine();
 					countLines++;
-					a1 = a.charAt(0);
-					a2 = a.charAt(2);
+					a1 = Character.getNumericValue(a.charAt(0));
+					a2 = Character.getNumericValue(a.charAt(2));
 					f.setNumerator(a1);
 					f.setDenominator(a2);
 					q.setFalseAnswer1(f);
 
 					a = in.nextLine();
 					countLines++;
-					a1 = a.charAt(0);
-					a2 = a.charAt(2);
+					a1 = Character.getNumericValue(a.charAt(0));
+					a2 = Character.getNumericValue(a.charAt(2));
 					f.setNumerator(a1);
 					f.setDenominator(a2);
 					q.setFalseAnswer2(f);
 
 					a = in.nextLine();
 					countLines++;
-					a1 = a.charAt(0);
-					a2 = a.charAt(2);
+					a1 = Character.getNumericValue(a.charAt(0));
+					a2 = Character.getNumericValue(a.charAt(2));
 					f.setNumerator(a1);
 					f.setDenominator(a2);
 					q.setFalseAnswer3(f);
+					System.out.println(q);
 					if (countLines != 5){
 						throw new BadFormatException("Incorrect number of lines in question.");
 					}

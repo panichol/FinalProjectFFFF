@@ -34,6 +34,11 @@ public class Question {
 		this.falseAnswer1 = falseAnswer1;
 		this.falseAnswer2 = falseAnswer2;
 		this.falseAnswer3  = falseAnswer3;
+		sequencedAnswers = new ArrayList<Fraction>();
+		sequencedAnswers.add(correctAnswer);
+		sequencedAnswers.add(falseAnswer1);
+		sequencedAnswers.add(falseAnswer2);
+		sequencedAnswers.add(falseAnswer3);
 	}
 	
 	
@@ -63,21 +68,24 @@ public class Question {
 		return falseAnswer1;
 	}
 	public void setFalseAnswer1(Fraction falseAnswer1) {
-		this.falseAnswer1 = falseAnswer1;
+		this.falseAnswer1 = new Fraction(falseAnswer1);
 	}
 	public Fraction getFalseAnswer2() {
 		return falseAnswer2;
 	}
 	public void setFalseAnswer2(Fraction falseAnswer2) {
-		this.falseAnswer2 = falseAnswer2;
+		this.falseAnswer2 =  new Fraction(falseAnswer2);
 	}
 	public Fraction getFalseAnswer3() {
 		return falseAnswer3;
 	}
 	public void setFalseAnswer3(Fraction falseAnswer3) {
-		this.falseAnswer3 = falseAnswer3;
+		this.falseAnswer3 =  new Fraction(falseAnswer3);
 	}
 	public void setCorrectAnswer(Fraction correctAnswer) {
-		this.correctAnswer = correctAnswer;
+		this.correctAnswer =  new Fraction(correctAnswer);
+	}
+	public String toString(){
+		return question + " " + correctAnswer;
 	}
 }
