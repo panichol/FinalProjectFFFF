@@ -36,12 +36,13 @@ private int livesRemaining;
 	 * 
 	 * @return true if still has lives remaining. False if lives == 0.
 	 */
-	public boolean loseLife() {
+	//public boolean loseLife() {
+	public void loseLife() {
 		if(livesRemaining == 1) {
 			livesRemaining = 0;
-			return false;
+			//return false;
 		}
 		livesRemaining--;
-		return true;
+		//return true;
 	}
 }
