@@ -40,9 +40,10 @@ public class GameEngine {
 		try{
 			FileReader reader = new FileReader(fileName);
 			Scanner in = new Scanner(reader);
-			int numQuestions = Integer.parseInt(in.nextLine());			//TODO MAKE WORK
-			
-			//int numQuestions = Integer.parseInt("10");
+			//////////////////
+			//int numQuestions = Integer.parseInt(in.nextLine());			//TODO MAKE WORK
+			//////////////////
+			int numQuestions = 20;
 			in.nextLine();
 			Question q = new Question();
 			Fraction f = new Fraction();
@@ -53,9 +54,15 @@ public class GameEngine {
 				if (in.hasNextLine()){				//TODO Refactor
 					countLines = 0;
 					String a = in.nextLine();
+					String[] divisionTest = a.split("~");	//Reading in a "÷" is difficult, so we replace all ÷ with ~ in the file, 
+															//and fix it with this if statement
+					if (divisionTest.length == 1)
+						q.setQuestion(a);
+					else if (divisionTest.length == 2){
+						q.setQuestion(divisionTest[0] + "÷" + divisionTest[1]);
+					}
 					countLines++;
-					q.setQuestion(a);
-					
+							
 					a = in.nextLine();
 					String[] input = a.split("/");
 					countLines++;
@@ -96,6 +103,7 @@ public class GameEngine {
 						throw new BadFormatException("Incorrect number of lines in question. was " +countLines + " should be 5");
 					}
 					else{
+						System.out.println(q);
 						questions.add(new Question(q));
 					}
 				}
