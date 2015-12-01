@@ -24,9 +24,14 @@ public class GameGUI extends JFrame {
 
 	public GameGUI() {
 		setSize(600,800);
+		int ascii = 65; //first radio button will be 'a'
+		String c;
 		buttons = new ArrayList<JRadioButton>();
 		for (int i=0; i < 4; i++) {
-			buttons.add(new JRadioButton());
+			
+			c = Character.toString((char)(ascii + i));
+			buttons.add(new JRadioButton(c));
+			
 		}
 		
 		timeDisp = new JTextField(20);
@@ -99,5 +104,5 @@ public class GameGUI extends JFrame {
 		}
 		repaint();
 	}
-
+	
 }
