@@ -241,9 +241,11 @@ public class GameEngine {
 				, "Welcome", JOptionPane.INFORMATION_MESSAGE);
 		GameEngine.gui.setVisible(true);
 		
-//		while (game.player.getLivesRemaining() > 0){
-			Question q = game.getQuestion();
-			game.askQuestion();
-//		}
+		for (int i = 0; i < 13; i++){
+			if (game.player.getLivesRemaining() > 0){
+				Question q = game.getQuestion();
+				game.askQuestion();
+			}
+		}
 	}
 }

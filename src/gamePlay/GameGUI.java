@@ -1,16 +1,13 @@
 package gamePlay;
 
-<<<<<<< HEAD
 import java.awt.Dimension;
 import java.awt.GraphicsConfiguration;
 import java.awt.GridLayout;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-=======
 import java.awt.*;
 import java.net.URL;
->>>>>>> 18f03c6158de2f5c26a4e3a4403ca2bef62cd432
 import java.util.ArrayList;
 
 import javax.swing.ButtonGroup;
@@ -33,7 +30,7 @@ public class GameGUI extends JFrame {
 	private JTextField questionDisp;
 	private JTextField livesDisp;
 	private ArrayList<JRadioButton> buttons;
-	
+	private String answer = "";
 	//Image stuff
 	private Image playerSprite;
 	private Image background;
@@ -162,13 +159,22 @@ public class GameGUI extends JFrame {
 		}
 		
 		JButton submit = new JButton("Submit");
+		submit.setActionCommand("Submit");
 		qPanel.add(submit);
 
 		submit.addActionListener(new ActionListener() {
 	//		@Overrride
 			public void actionPerformed(ActionEvent e){
-				String test = group.getSelection().getActionCommand();
-				System.out.println("test " + test);
+				String pressed = group.getSelection().getActionCommand();
+				System.out.println("Button pressed " + pressed);
+				if (pressed.equals(answer)){
+					System.out.println("correct");
+					return;
+				}
+				else {
+					System.out.println("incorrect");
+					return;
+				}
 				
 			}
 		});
@@ -201,6 +207,7 @@ public class GameGUI extends JFrame {
 	public void updateQuestion(Question question) {
 		questionDisp.setText(question.getQuestion());
 		int i=0;
+		answer = question.getCorrectAnswer().toString();
 		for (Fraction answer : question.orderAnswers()) {
 			buttons.get(i).setText(question.sequencedAnswers.get(i).toString());
 			buttons.get(i).setActionCommand(buttons.get(i).getText());
