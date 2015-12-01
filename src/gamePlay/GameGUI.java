@@ -1,16 +1,9 @@
 package gamePlay;
 
-<<<<<<< HEAD
-import java.awt.Dimension;
-import java.awt.GraphicsConfiguration;
-import java.awt.GridLayout;
-import java.awt.HeadlessException;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-=======
-import java.awt.*;
 import java.net.URL;
->>>>>>> 18f03c6158de2f5c26a4e3a4403ca2bef62cd432
 import java.util.ArrayList;
 
 import javax.swing.ButtonGroup;
