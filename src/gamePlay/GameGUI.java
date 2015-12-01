@@ -1,8 +1,7 @@
 package gamePlay;
 
-import java.awt.GraphicsConfiguration;
-import java.awt.GridLayout;
-import java.awt.HeadlessException;
+import java.awt.*;
+import java.net.URL;
 import java.util.ArrayList;
 
 import javax.swing.ButtonGroup;
@@ -21,6 +20,10 @@ public class GameGUI extends JFrame {
 	private JTextField questionDisp;
 	private JTextField livesDisp;
 	private ArrayList<JRadioButton> buttons;
+	
+	//Image stuff
+	Image playerSprite;
+	Image background;
 
 	public GameGUI() {
 		setSize(600,800);
@@ -38,16 +41,49 @@ public class GameGUI extends JFrame {
 		livesDisp = new JTextField(5);
 		livesDisp.setEnabled(false);
 		
-		//graphicsPanel = createGraphicsPanel();
-		//add(graphicsPanel);
+		graphicsPanel = createGraphicsPanel();
+		add(playerSprite);
 		questionPanel = createQuestionPanel();
 		add(questionPanel);
 		//playerStatus = createPlayerStatusPanel();
 		//add(playerStatus);
 	}
 
-	private JPanel createGraphicsPanel() {
-		return null;
+	private Image getImage(String pathName) {
+		URL url = getClass().getResource(pathName);
+		Image image = Toolkit.getDefaultToolkit().getImage(url);
+		return image;
+	}
+
+	private ImagePanel createGraphicsPanel() {
+		ImagePanel graphicsPanel = new ImagePanel();
+		return graphicsPanel;
+	}
+	
+	public class ImagePanel extends JPanel{
+		public ImagePanel() {
+				MediaTracker tracker = new MediaTracker(this);
+				Image player = getImage("/images/player.png");
+				Image back = getImage("/images/board.png");
+				
+				tracker.addImage(background, 0);
+				try {
+					tracker.waitForID(0);
+				} catch (InterruptedException e) {  return; }
+				tracker.addImage(playerSprite, 1);
+				try {
+					tracker.waitForID(0);
+				} catch (InterruptedException e) {  return; }
+				
+				background = back.getScaledInstance(1600, 1000, Image.SCALE_FAST);
+				playerSprite = player.getScaledInstance(110, 170,  Image.SCALE_FAST);
+		}
+
+		public void paintComponent(Graphics g) {
+			int PADDING = 20;
+			g.drawImage(background, PADDING, PADDING, 1600, 1000, null);
+			g.drawImage(playerSprite, 0, 0, 110, 170, null);
+		}
 	}
 
 	private JPanel createQuestionPanel() {
