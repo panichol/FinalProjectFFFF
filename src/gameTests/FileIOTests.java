@@ -49,7 +49,7 @@ public class FileIOTests {
 			f2 = new Fraction(12,10);
 			f3 = new Fraction(6,5);
 			f4 = new Fraction(8,15);
-			Question q10 = new Question("What is 3/2 / 4/5 equal to?",f1,f2,f3,f4);
+			Question q10 = new Question("What is 3/2 ÷ 4/5 equal to?",f1,f2,f3,f4);
 			assertTrue(q10.equals(questions.get(9)));
 		}
 		catch (BadFormatException bfe) {

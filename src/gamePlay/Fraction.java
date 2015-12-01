@@ -31,7 +31,7 @@ public class Fraction {
 		this.denominator = denominator;
 	}
 	public void reduce(){
-
+		
 	}	
 	public boolean equals(Fraction other){
 		return numerator == other.numerator && denominator == other.denominator;
