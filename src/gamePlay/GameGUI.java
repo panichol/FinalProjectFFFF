@@ -74,7 +74,7 @@ public class GameGUI extends JFrame {
 		
 		for (JRadioButton button : buttons) {
 			button.setActionCommand(button.getText());
-			System.out.println(button.getText());
+			System.out.println("button " + button.getText());
 			group.add(button);
 			qPanel.add(button);
 		}
@@ -121,6 +121,8 @@ public class GameGUI extends JFrame {
 		int i=0;
 		for (Fraction answer : question.orderAnswers()) {
 			buttons.get(i).setText(question.sequencedAnswers.get(i).toString());
+			buttons.get(i).setActionCommand(buttons.get(i).getText());
+			System.out.println("button " + buttons.get(i).getText());
 			i++;
 		}
 		repaint();
