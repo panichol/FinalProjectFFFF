@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Collections;
 
+import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
 public class GameEngine {
@@ -16,7 +17,7 @@ public class GameEngine {
 	private Fraction playerFraction;
 	private ArrayList<Question> questions;
 	private Fraction playerAnswer;
-	private GameGUI gui;
+	private static GameGUI gui;
 	
 	//Timer variables
 	private Timer timer;		//The timer object. Can pause, start, and stop. Stops when out of time. 
@@ -40,10 +41,10 @@ public class GameEngine {
 		try{
 			FileReader reader = new FileReader(fileName);
 			Scanner in = new Scanner(reader);
-			/////////
-			//int numQuestions = Integer.parseInt(in.nextLine());
-			////////
-			int numQuestions = Integer.parseInt("10");
+			//////////////////
+			//int numQuestions = Integer.parseInt(in.nextLine());			//TODO MAKE WORK
+			//////////////////
+			int numQuestions = 20;
 			in.nextLine();
 			Question q = new Question();
 			Fraction f = new Fraction();
@@ -54,9 +55,15 @@ public class GameEngine {
 				if (in.hasNextLine()){				//TODO Refactor
 					countLines = 0;
 					String a = in.nextLine();
+					String[] divisionTest = a.split("~");	//Reading in a "÷" is difficult, so we replace all ÷ with ~ in the file, 
+															//and fix it with this if statement
+					if (divisionTest.length == 1)
+						q.setQuestion(a);
+					else if (divisionTest.length == 2){
+						q.setQuestion(divisionTest[0] + "÷" + divisionTest[1]);
+					}
 					countLines++;
-					q.setQuestion(a);
-					
+							
 					a = in.nextLine();
 					String[] input = a.split("/");
 					countLines++;
@@ -94,11 +101,9 @@ public class GameEngine {
 					q.setFalseAnswer3(f);
 					
 					if (countLines != 5){
-						throw new BadFormatException("Incorrect number of lines in question.");
+						throw new BadFormatException("Incorrect number of lines in question. was " +countLines + " should be 5");
 					}
 					else{
-						
-						System.out.println("Questions number :" +i);
 						System.out.println(q);
 						questions.add(new Question(q));
 					}
@@ -119,7 +124,7 @@ public class GameEngine {
 	}
 
 	public boolean askQuestion(){//asks the player a question , and returns whether or not they got it right
-
+		GameEngine.gui.updateQuestion(getQuestion());
 		return false;//return whether or not the player got the question right
 	}
 
@@ -157,10 +162,12 @@ public class GameEngine {
 			if(timeLeft > 0)
 			{
 				timeLeft--;
-				//TODO add the update GUI timer here.
+				gui.updateTime(timeLeft);
 			}
 			else {
 				//TODO what happens when the time is up here.
+				player.loseLife();
+				gui.updateStatus(player);
 				resetTimer();
 			}
 		}
@@ -220,6 +227,8 @@ public class GameEngine {
 	
 	public static void main(String args[]) {
 		GameEngine game = new GameEngine();
-		game.gui.setVisible(true);
+		JOptionPane.showMessageDialog(gui, "Welcome to Fraction Flash Flood - please press OK to continue"
+				, "Welcome", JOptionPane.INFORMATION_MESSAGE);
+		GameEngine.gui.setVisible(true);
 	}
 }

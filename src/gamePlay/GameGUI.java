@@ -1,17 +1,22 @@
 package gamePlay;
 
+import java.awt.Dimension;
 import java.awt.GraphicsConfiguration;
 import java.awt.GridLayout;
 import java.awt.HeadlessException;
 import java.util.ArrayList;
 
 import javax.swing.ButtonGroup;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
+import javax.swing.border.Border;
+import javax.swing.border.TitledBorder;
 
 public class GameGUI extends JFrame {
 	private JPanel graphicsPanel;
@@ -43,21 +48,29 @@ public class GameGUI extends JFrame {
 		livesDisp = new JTextField(5);
 		livesDisp.setEnabled(false);
 		
-		//graphicsPanel = createGraphicsPanel();
-		//add(graphicsPanel);
+		setLayout(new GridLayout(0,1));
+		graphicsPanel = createGraphicsPanel();
+		add(graphicsPanel);
+		JPanel bottom = new JPanel();
+		bottom.setLayout(new GridLayout(1,0));
+		playerStatus = createPlayerStatusPanel();
+		bottom.add(playerStatus);
 		questionPanel = createQuestionPanel();
-		add(questionPanel);
-		//playerStatus = createPlayerStatusPanel();
-		//add(playerStatus);
+		bottom.add(questionPanel);
+		add(bottom);
 	}
 
 	private JPanel createGraphicsPanel() {
-		return null;
+		JPanel gPanel = new JPanel();
+		
+		return gPanel;
 	}
 
 	private JPanel createQuestionPanel() {
 		JPanel qPanel = new JPanel();
 		qPanel.setLayout(new GridLayout(0,1));
+		TitledBorder questionBorder = new TitledBorder("Question");
+		qPanel.setBorder(questionBorder);
 		ButtonGroup group = new ButtonGroup();
 		
 		qPanel.add(questionDisp);
@@ -74,7 +87,19 @@ public class GameGUI extends JFrame {
 	}
 
 	private JPanel createPlayerStatusPanel() {
-		return null;
+		JPanel sPanel = new JPanel();
+		sPanel.setLayout(new GridLayout(0,1));
+		
+		TitledBorder statusBorder = new TitledBorder("Player Status");
+		JLabel timeLabel = new JLabel("Time Remaining");
+		JLabel livesLabel = new JLabel("Lives Remaining");
+		sPanel.setBorder(statusBorder);
+		sPanel.add(timeLabel);
+		sPanel.add(timeDisp);
+		sPanel.add(livesLabel);
+		sPanel.add(livesDisp);
+		
+		return sPanel;
 	}
 
 	public void updateTime(int time) {
