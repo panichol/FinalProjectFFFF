@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Collections;
 
+import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
 public class GameEngine {
@@ -16,7 +17,7 @@ public class GameEngine {
 	private Fraction playerFraction;
 	private ArrayList<Question> questions;
 	private Fraction playerAnswer;
-	private GameGUI gui;
+	private static GameGUI gui;
 	
 	//Timer variables
 	private Timer timer;		//The timer object. Can pause, start, and stop. Stops when out of time. 
@@ -119,7 +120,7 @@ public class GameEngine {
 	}
 
 	public boolean askQuestion(){//asks the player a question , and returns whether or not they got it right
-
+		GameEngine.gui.updateQuestion(getQuestion());
 		return false;//return whether or not the player got the question right
 	}
 
@@ -157,10 +158,12 @@ public class GameEngine {
 			if(timeLeft > 0)
 			{
 				timeLeft--;
-				//TODO add the update GUI timer here.
+				gui.updateTime(timeLeft);
 			}
 			else {
 				//TODO what happens when the time is up here.
+				player.loseLife();
+				gui.updateStatus(player);
 				resetTimer();
 			}
 		}
@@ -220,6 +223,8 @@ public class GameEngine {
 	
 	public static void main(String args[]) {
 		GameEngine game = new GameEngine();
-		game.gui.setVisible(true);
+		JOptionPane.showMessageDialog(gui, "Welcome to Fraction Flash Flood - please press OK to continue"
+				, "Welcome", JOptionPane.INFORMATION_MESSAGE);
+		GameEngine.gui.setVisible(true);
 	}
 }
