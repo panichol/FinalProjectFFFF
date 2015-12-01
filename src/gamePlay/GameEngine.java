@@ -40,10 +40,9 @@ public class GameEngine {
 		try{
 			FileReader reader = new FileReader(fileName);
 			Scanner in = new Scanner(reader);
-			/////////
-			//int numQuestions = Integer.parseInt(in.nextLine());
-			////////
-			int numQuestions = Integer.parseInt("10");
+			int numQuestions = Integer.parseInt(in.nextLine());			//TODO MAKE WORK
+			
+			//int numQuestions = Integer.parseInt("10");
 			in.nextLine();
 			Question q = new Question();
 			Fraction f = new Fraction();
@@ -94,12 +93,9 @@ public class GameEngine {
 					q.setFalseAnswer3(f);
 					
 					if (countLines != 5){
-						throw new BadFormatException("Incorrect number of lines in question.");
+						throw new BadFormatException("Incorrect number of lines in question. was " +countLines + " should be 5");
 					}
 					else{
-						
-						System.out.println("Questions number :" +i);
-						System.out.println(q);
 						questions.add(new Question(q));
 					}
 				}
