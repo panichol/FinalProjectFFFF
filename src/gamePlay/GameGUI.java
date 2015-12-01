@@ -4,6 +4,8 @@ import java.awt.Dimension;
 import java.awt.GraphicsConfiguration;
 import java.awt.GridLayout;
 import java.awt.HeadlessException;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.ButtonGroup;
@@ -29,14 +31,9 @@ public class GameGUI extends JFrame {
 
 	public GameGUI() {
 		setSize(600,800);
-		int ascii = 65; //first radio button will be 'a'
-		String c;
 		buttons = new ArrayList<JRadioButton>();
 		for (int i=0; i < 4; i++) {
-			
-			c = Character.toString((char)(ascii + i));
-			buttons.add(new JRadioButton(c));
-			
+			buttons.add(new JRadioButton());
 		}
 		
 		timeDisp = new JTextField(20);
@@ -71,11 +68,13 @@ public class GameGUI extends JFrame {
 		qPanel.setLayout(new GridLayout(0,1));
 		TitledBorder questionBorder = new TitledBorder("Question");
 		qPanel.setBorder(questionBorder);
-		ButtonGroup group = new ButtonGroup();
+		final ButtonGroup group = new ButtonGroup();
 		
 		qPanel.add(questionDisp);
 		
 		for (JRadioButton button : buttons) {
+			button.setActionCommand(button.getText());
+			System.out.println(button.getText());
 			group.add(button);
 			qPanel.add(button);
 		}
@@ -83,9 +82,19 @@ public class GameGUI extends JFrame {
 		JButton submit = new JButton("Submit");
 		qPanel.add(submit);
 
+		submit.addActionListener(new ActionListener() {
+	//		@Overrride
+			public void actionPerformed(ActionEvent e){
+				String test = group.getSelection().getActionCommand();
+				System.out.println("test " + test);
+				
+			}
+		});
+		
+		
 		return qPanel;
 	}
-
+	
 	private JPanel createPlayerStatusPanel() {
 		JPanel sPanel = new JPanel();
 		sPanel.setLayout(new GridLayout(0,1));
@@ -111,7 +120,7 @@ public class GameGUI extends JFrame {
 		questionDisp.setText(question.getQuestion());
 		int i=0;
 		for (Fraction answer : question.orderAnswers()) {
-			buttons.get(i).setText(answer.toString());
+			buttons.get(i).setText(question.sequencedAnswers.get(i).toString());
 			i++;
 		}
 		repaint();

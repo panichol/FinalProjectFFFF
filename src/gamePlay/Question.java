@@ -21,11 +21,12 @@ public class Question {
 		falseAnswer1 = new Fraction();
 		falseAnswer2 = new Fraction();
 		falseAnswer3  = new Fraction();
-		sequencedAnswers = new ArrayList<Fraction>();
-		sequencedAnswers.add(correctAnswer);
-		sequencedAnswers.add(falseAnswer1);
-		sequencedAnswers.add(falseAnswer2);
-		sequencedAnswers.add(falseAnswer3);
+//		sequencedAnswers = new ArrayList<Fraction>();
+//		sequencedAnswers.add(correctAnswer);
+//		sequencedAnswers.add(falseAnswer1);
+//		sequencedAnswers.add(falseAnswer2);
+//		sequencedAnswers.add(falseAnswer3);
+		System.out.println("sequenced " + correctAnswer.getNumerator());
 
 	}
 	public Question(String question, Fraction correctAnswer,Fraction falseAnswer1,Fraction falseAnswer2,Fraction falseAnswer3){
@@ -34,11 +35,12 @@ public class Question {
 		this.falseAnswer1 = falseAnswer1;
 		this.falseAnswer2 = falseAnswer2;
 		this.falseAnswer3  = falseAnswer3;
-		sequencedAnswers = new ArrayList<Fraction>();
-		sequencedAnswers.add(correctAnswer);
-		sequencedAnswers.add(falseAnswer1);
-		sequencedAnswers.add(falseAnswer2);
-		sequencedAnswers.add(falseAnswer3);
+//		sequencedAnswers = new ArrayList<Fraction>();
+//		sequencedAnswers.add(correctAnswer);
+//		sequencedAnswers.add(falseAnswer1);
+//		sequencedAnswers.add(falseAnswer2);
+//		sequencedAnswers.add(falseAnswer3);
+		System.out.println("sequenced " + correctAnswer.getNumerator());
 	}
 	
 	public Question(Question other){
@@ -47,14 +49,22 @@ public class Question {
 		falseAnswer1 = other.falseAnswer1;
 		falseAnswer2 = other.falseAnswer2;
 		falseAnswer3 = other.falseAnswer3;
+//		sequencedAnswers = new ArrayList<Fraction>();
+//		sequencedAnswers.add(correctAnswer);
+//		sequencedAnswers.add(falseAnswer1);
+//		sequencedAnswers.add(falseAnswer2);
+//		sequencedAnswers.add(falseAnswer3);
+//		System.out.println("sequenced " + correctAnswer.getNumerator());
+
+	}
+	public void sequenceAnswers(){
 		sequencedAnswers = new ArrayList<Fraction>();
 		sequencedAnswers.add(correctAnswer);
 		sequencedAnswers.add(falseAnswer1);
 		sequencedAnswers.add(falseAnswer2);
 		sequencedAnswers.add(falseAnswer3);
-
+		System.out.println("sequenced " + falseAnswer1.getNumerator());
 	}
-
 	public Fraction getCorrectAnswer() {
 		return correctAnswer;
 	}
@@ -67,7 +77,6 @@ public class Question {
 	}
 	public boolean equals(Question other){//returns true if the question and its answer are the same
 		return question.equals(other.question)&&correctAnswer.equals(other.correctAnswer);
-		
 	}
 	
 	public String getQuestion() {
@@ -80,22 +89,22 @@ public class Question {
 		return falseAnswer1;
 	}
 	public void setFalseAnswer1(Fraction falseAnswer1) {
-		this.falseAnswer1 = new Fraction(falseAnswer1);
+		this.falseAnswer1 = falseAnswer1;
 	}
 	public Fraction getFalseAnswer2() {
 		return falseAnswer2;
 	}
 	public void setFalseAnswer2(Fraction falseAnswer2) {
-		this.falseAnswer2 =  new Fraction(falseAnswer2);
+		this.falseAnswer2 =  falseAnswer2;
 	}
 	public Fraction getFalseAnswer3() {
 		return falseAnswer3;
 	}
 	public void setFalseAnswer3(Fraction falseAnswer3) {
-		this.falseAnswer3 =  new Fraction(falseAnswer3);
+		this.falseAnswer3 =  falseAnswer3;
 	}
 	public void setCorrectAnswer(Fraction correctAnswer) {
-		this.correctAnswer =  new Fraction(correctAnswer);
+		this.correctAnswer =  correctAnswer;
 	}
 	public String toString(){
 		return question + " " + correctAnswer;

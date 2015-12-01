@@ -47,7 +47,11 @@ public class GameEngine {
 			int numQuestions = 20;
 			in.nextLine();
 			Question q = new Question();
-			Fraction f = new Fraction();
+			Fraction f1 = new Fraction();
+			Fraction f2 = new Fraction();
+			Fraction f3 = new Fraction();
+			Fraction f4 = new Fraction();
+			
 			int a1;
 			int a2;
 			int countLines = 0;
@@ -69,43 +73,48 @@ public class GameEngine {
 					countLines++;
 					a1 = Integer.parseInt(input[0]);
 					a2 = Integer.parseInt(input[1]);
-					f.setNumerator(a1);
-					f.setDenominator(a2);
-					q.setCorrectAnswer(f);
+					f1.setNumerator(a1);
+					f1.setDenominator(a2);
+					q.setCorrectAnswer(f1);
 
 					a = in.nextLine();
 					input = a.split("/");
 					countLines++;
 					a1 = Integer.parseInt(input[0]);
 					a2 = Integer.parseInt(input[1]);
-					f.setNumerator(a1);
-					f.setDenominator(a2);
-					q.setFalseAnswer1(f);
+					f2.setNumerator(a1);
+					f2.setDenominator(a2);
+					q.setFalseAnswer1(f2);
 
 					a = in.nextLine();
 					input = a.split("/");
 					countLines++;
 					a1 = Integer.parseInt(input[0]);
 					a2 = Integer.parseInt(input[1]);
-					f.setNumerator(a1);
-					f.setDenominator(a2);
-					q.setFalseAnswer2(f);
+					f3.setNumerator(a1);
+					f3.setDenominator(a2);
+					q.setFalseAnswer2(f3);
 
 					a = in.nextLine();
 					input = a.split("/");
 					countLines++;
 					a1 = Integer.parseInt(input[0]);
 					a2 = Integer.parseInt(input[1]);
-					f.setNumerator(a1);
-					f.setDenominator(a2);
-					q.setFalseAnswer3(f);
+					f4.setNumerator(a1);
+					f4.setDenominator(a2);
+					q.setFalseAnswer3(f4);
 					
 					if (countLines != 5){
 						throw new BadFormatException("Incorrect number of lines in question. was " +countLines + " should be 5");
 					}
 					else{
-						System.out.println(q);
-						questions.add(new Question(q));
+						q.sequenceAnswers();
+//						System.out.println(q);
+//						System.out.println(q.getCorrectAnswer());
+//						System.out.println(q.getFalseAnswer1());
+//						System.out.println(q.getFalseAnswer2());
+//						System.out.println(q.getFalseAnswer3());
+						questions.add(q);
 					}
 				}
 			}
@@ -225,10 +234,16 @@ public class GameEngine {
 		return startTime;
 	}
 	
-	public static void main(String args[]) {
+	public static void main(String args[]) throws BadFormatException {
 		GameEngine game = new GameEngine();
+		game.loadQuestionFile("input.txt");
 		JOptionPane.showMessageDialog(gui, "Welcome to Fraction Flash Flood - please press OK to continue"
 				, "Welcome", JOptionPane.INFORMATION_MESSAGE);
 		GameEngine.gui.setVisible(true);
+		
+//		while (game.player.getLivesRemaining() > 0){
+			Question q = game.getQuestion();
+			game.askQuestion();
+//		}
 	}
 }
