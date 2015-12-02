@@ -6,8 +6,10 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 import java.util.Collections;
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
@@ -20,7 +22,7 @@ public class GameEngine {
 	private static GameGUI gui;
 	
 	//Timer variables
-	private Timer timer;		//The timer object. Can pause, start, and stop. Stops when out of time. 
+	private static Timer timer;		//The timer object. Can pause, start, and stop. Stops when out of time. 
 	private int timeLeft;			//The time left for the question.
 	private int startTime;			//The time that the timer will start at when reset.
 	public boolean timeRemaining;	//True for has time, false if out of time.
@@ -35,6 +37,8 @@ public class GameEngine {
 		timer = new Timer(1000, new TimerListener());
 		gui = new GameGUI();
 		questions = new ArrayList<Question>();
+		
+		//gui.updatePlayerRock(10);
 	}
 	
 	public void loadQuestionFile(String fileName) throws BadFormatException{
@@ -59,12 +63,12 @@ public class GameEngine {
 				if (in.hasNextLine()){				//TODO Refactor
 					countLines = 0;
 					String a = in.nextLine();
-					String[] divisionTest = a.split("~");	//Reading in a "÷" is difficult, so we replace all ÷ with ~ in the file, 
+					String[] divisionTest = a.split("~");	//Reading in a "ï¿½" is difficult, so we replace all ï¿½ with ~ in the file, 
 															//and fix it with this if statement
 					if (divisionTest.length == 1)
 						q.setQuestion(a);
 					else if (divisionTest.length == 2){
-						q.setQuestion(divisionTest[0] + "÷" + divisionTest[1]);
+						q.setQuestion(divisionTest[0] + "ï¿½" + divisionTest[1]);
 					}
 					countLines++;
 							
@@ -170,13 +174,18 @@ public class GameEngine {
 			//http://stackoverflow.com/questions/9721066/how-to-display-java-timer-on-a-separate-j-frame-form-label
 			if(timeLeft > 0)
 			{
+				//System.out.println("Time left is " + timeLeft);
+				gui.updatePlayerRock(11-timeLeft);
 				timeLeft--;
 				gui.updateTime(timeLeft);
+				
+				gui.repaint();
 			}
 			else {
 				//TODO what happens when the time is up here.
 				player.loseLife();
 				gui.updateStatus(player);
+				gui.updatePlayerRock(11);
 				resetTimer();
 			}
 		}
@@ -185,7 +194,7 @@ public class GameEngine {
 	/**
 	 * Start the timer from current time left 
 	 */
-	public void startTimer() {
+	public static void startTimer() {
 		timer.start();
 	}
 	/**
@@ -239,7 +248,10 @@ public class GameEngine {
 		game.loadQuestionFile("input.txt");
 		JOptionPane.showMessageDialog(gui, "Welcome to Fraction Flash Flood - please press OK to continue"
 				, "Welcome", JOptionPane.INFORMATION_MESSAGE);
-		GameEngine.gui.setVisible(true);
+		game.gui.setVisible(true);
+		game.gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		GameEngine.startTimer();
 		
 		for (int i = 0; i < 13; i++){
 			if (game.player.getLivesRemaining() > 0){

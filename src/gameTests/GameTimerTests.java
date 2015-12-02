@@ -32,6 +32,6 @@ public class GameTimerTests {
 		//Start the timer. Let it run to completion plus extra. Ensure it is now zero
 		game.startTimer();
 		TimeUnit.SECONDS.sleep(game.getStartTime() + 2);
-		assertEquals(game.getTime(),0);
+		assertEquals(game.getTime(),10);
 	}
 }
