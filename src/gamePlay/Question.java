@@ -15,18 +15,18 @@ public class Question {
 	private Fraction falseAnswer1;
 	private Fraction falseAnswer2;
 	private Fraction falseAnswer3;
-	ArrayList<Fraction> sequencedAnswers;
+	public ArrayList<Fraction> sequencedAnswers;
 	public Question(){
 		correctAnswer = new Fraction();
 		falseAnswer1 = new Fraction();
 		falseAnswer2 = new Fraction();
 		falseAnswer3  = new Fraction();
-//		sequencedAnswers = new ArrayList<Fraction>();
-//		sequencedAnswers.add(correctAnswer);
-//		sequencedAnswers.add(falseAnswer1);
-//		sequencedAnswers.add(falseAnswer2);
-//		sequencedAnswers.add(falseAnswer3);
-		System.out.println("sequenced " + correctAnswer.getNumerator());
+		sequencedAnswers = new ArrayList<Fraction>();
+		sequencedAnswers.add(correctAnswer);
+		sequencedAnswers.add(falseAnswer1);
+		sequencedAnswers.add(falseAnswer2);
+		sequencedAnswers.add(falseAnswer3);
+//		System.out.println("sequenced q " + correctAnswer.getNumerator());
 
 	}
 	public Question(String question, Fraction correctAnswer,Fraction falseAnswer1,Fraction falseAnswer2,Fraction falseAnswer3){
@@ -35,12 +35,12 @@ public class Question {
 		this.falseAnswer1 = falseAnswer1;
 		this.falseAnswer2 = falseAnswer2;
 		this.falseAnswer3  = falseAnswer3;
-//		sequencedAnswers = new ArrayList<Fraction>();
-//		sequencedAnswers.add(correctAnswer);
-//		sequencedAnswers.add(falseAnswer1);
-//		sequencedAnswers.add(falseAnswer2);
-//		sequencedAnswers.add(falseAnswer3);
-		System.out.println("sequenced " + correctAnswer.getNumerator());
+		sequencedAnswers = new ArrayList<Fraction>();
+		sequencedAnswers.add(correctAnswer);
+		sequencedAnswers.add(falseAnswer1);
+		sequencedAnswers.add(falseAnswer2);
+		sequencedAnswers.add(falseAnswer3);
+//		System.out.println("sequenced q" + correctAnswer.getNumerator());
 	}
 	
 	public Question(Question other){
@@ -49,12 +49,12 @@ public class Question {
 		falseAnswer1 = other.falseAnswer1;
 		falseAnswer2 = other.falseAnswer2;
 		falseAnswer3 = other.falseAnswer3;
-//		sequencedAnswers = new ArrayList<Fraction>();
-//		sequencedAnswers.add(correctAnswer);
-//		sequencedAnswers.add(falseAnswer1);
-//		sequencedAnswers.add(falseAnswer2);
-//		sequencedAnswers.add(falseAnswer3);
-//		System.out.println("sequenced " + correctAnswer.getNumerator());
+		sequencedAnswers = new ArrayList<Fraction>();
+		sequencedAnswers.add(correctAnswer);
+		sequencedAnswers.add(falseAnswer1);
+		sequencedAnswers.add(falseAnswer2);
+		sequencedAnswers.add(falseAnswer3);
+//		System.out.println("sequenced q" + correctAnswer.getNumerator());
 
 	}
 	public void sequenceAnswers(){
@@ -63,7 +63,7 @@ public class Question {
 		sequencedAnswers.add(falseAnswer1);
 		sequencedAnswers.add(falseAnswer2);
 		sequencedAnswers.add(falseAnswer3);
-		System.out.println("sequenced " + falseAnswer1.getNumerator());
+//		System.out.println("sequenced " + falseAnswer1.getNumerator());
 	}
 	public Fraction getCorrectAnswer() {
 		return correctAnswer;

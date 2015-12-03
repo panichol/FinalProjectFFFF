@@ -50,16 +50,21 @@ public class GameEngine {
 			//////////////////
 			int numQuestions = 20;
 			in.nextLine();
-			Question q = new Question();
-			Fraction f1 = new Fraction();
-			Fraction f2 = new Fraction();
-			Fraction f3 = new Fraction();
-			Fraction f4 = new Fraction();
+//			Question q = new Question();
+//			Fraction f1 = new Fraction();
+//			Fraction f2 = new Fraction();
+//			Fraction f3 = new Fraction();
+//			Fraction f4 = new Fraction();
 			
 			int a1;
 			int a2;
 			int countLines = 0;
 			for (int i = 0; i < numQuestions; i++){
+				Question q = new Question();
+				Fraction f1 = new Fraction();
+				Fraction f2 = new Fraction();
+				Fraction f3 = new Fraction();
+				Fraction f4 = new Fraction();
 				if (in.hasNextLine()){				//TODO Refactor
 					countLines = 0;
 					String a = in.nextLine();
@@ -113,11 +118,11 @@ public class GameEngine {
 					}
 					else{
 						q.sequenceAnswers();
-//						System.out.println(q);
-//						System.out.println(q.getCorrectAnswer());
-//						System.out.println(q.getFalseAnswer1());
-//						System.out.println(q.getFalseAnswer2());
-//						System.out.println(q.getFalseAnswer3());
+						System.out.println(q);
+						System.out.println("sequenced " + q.sequencedAnswers.get(0).getNumerator());
+						System.out.println("sequenced " + q.sequencedAnswers.get(1).getNumerator());
+						System.out.println("sequenced " + q.sequencedAnswers.get(2).getNumerator());
+						System.out.println("sequenced " + q.sequencedAnswers.get(3).getNumerator());
 						questions.add(q);
 					}
 				}
@@ -156,7 +161,11 @@ public class GameEngine {
 	public ArrayList<Question> getQuestionsArray(){
 		return questions;
 	}
-
+	public void printQuestions(){
+		for (Question q : questions){
+			System.out.println(q.sequencedAnswers.get(0).getDenominator());
+		}
+	}
 	public void setQuestionsArray(ArrayList<Question> questions) {
 		this.questions = questions;
 
@@ -257,16 +266,14 @@ public class GameEngine {
 		game.gui.updateStatus(game.player);
 		
 		GameEngine.startTimer();
-		
-		for (int i = 0; i < 13; i++) {
+		game.printQuestions();
 			System.out.println("here");
 			if (game.player.getLivesRemaining() > 0){
 				Question q = game.getQuestion();
 				boolean correct = game.askQuestion();
 				
-			//	GameEngine.gui.updateQuestion(game.getQuestion());
+				GameEngine.gui.updateQuestion(game.getQuestion());
 				GameEngine.gui.setVisible(true);
 			}
-		}
 	}
 }

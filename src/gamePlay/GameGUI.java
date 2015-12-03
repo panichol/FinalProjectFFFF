@@ -195,8 +195,6 @@ public class GameGUI extends JFrame {
 
 		group = new ButtonGroup();
 		
-		final ButtonGroup group = new ButtonGroup();
-
 		qPanel.add(questionDisp);
 
 		for (JRadioButton button : buttons) {
@@ -206,10 +204,6 @@ public class GameGUI extends JFrame {
 			qPanel.add(button);
 		}
 		
-		submit = new JButton("Submit");
-		submit.setActionCommand("Submit");
-		qPanel.add(submit);
-
 //		submit.addActionListener(new ActionListener() {
 //			public void actionPerformed(ActionEvent e){
 //				String pressed = group.getSelection().getActionCommand();
@@ -227,26 +221,26 @@ public class GameGUI extends JFrame {
 //		});
 
 
-		JButton submit = new JButton("Submit");
+		submit = new JButton("Submit");
 		submit.setActionCommand("Submit");
 		qPanel.add(submit);
 
-		submit.addActionListener(new ActionListener() {
-			//		@Overrride
-			public void actionPerformed(ActionEvent e){
-				String pressed = group.getSelection().getActionCommand();
-				System.out.println("Button pressed " + pressed);
-				if (pressed.equals(answer)){
-					System.out.println("correct");
-					return;
-				}
-				else {
-					System.out.println("incorrect");
-					return;
-				}
-
-			}
-		});
+//		submit.addActionListener(new ActionListener() {
+//			//		@Overrride
+//			public void actionPerformed(ActionEvent e){
+//				String pressed = group.getSelection().getActionCommand();
+//				System.out.println("Button pressed " + pressed);
+//				if (pressed.equals(answer)){
+//					System.out.println("correct");
+//					return;
+//				}
+//				else {
+//					System.out.println("incorrect");
+//					return;
+//				}
+//
+//			}
+//		});
 
 		return qPanel;
 	}
@@ -284,23 +278,24 @@ public class GameGUI extends JFrame {
 		gameGUIQuestions = q;
 		clicked = false;
 		updateQuestion(pickQuestion(gameGUIQuestions));
+		System.out.println(pickQuestion(gameGUIQuestions).getCorrectAnswer());
 		submit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
 				String actionCommand = ((JButton) e.getSource()).getActionCommand();
 				System.out.println("Action command for pressed button: " + actionCommand);
-				clicked = true;
+//				clicked = true;
 				if (actionCommand.equals("Submit")){
 					String pressed = group.getSelection().getActionCommand();
 					System.out.println("Button pressed " + pressed);
 					if (pressed.equals(answer)){	
 						//To Do: add in player status updates
 						System.out.println("correct" + questionCounter);
-//						updateQuestion(pickQuestion(gameGUIQuestions));
+						updateQuestion(pickQuestion(gameGUIQuestions));
 						correct = true;
 					}
 					else {
 						//To Do: add in player status updates
-//						updateQuestion(pickQuestion(gameGUIQuestions));
+						updateQuestion(pickQuestion(gameGUIQuestions));
 						correct = false;
 					}
 				}
@@ -309,6 +304,7 @@ public class GameGUI extends JFrame {
 	}
 
 	public void updateQuestion(Question question) {
+		group.clearSelection();
 		questionDisp.setText(question.getQuestion());
 		int i=0;
 		answer = question.getCorrectAnswer().toString();
