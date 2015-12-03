@@ -1,12 +1,8 @@
 package gamePlay;
 
-import java.awt.Dimension;
-import java.awt.GraphicsConfiguration;
-import java.awt.GridLayout;
-import java.awt.HeadlessException;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.*;
 import java.net.URL;
 import java.util.ArrayList;
 
@@ -48,21 +44,21 @@ public class GameGUI extends JFrame {
 		for (int i=0; i < 4; i++) {
 			buttons.add(new JRadioButton());
 		}
-		
+
 		timeDisp = new JTextField(20);
 		timeDisp.setEnabled(false);
-		
+
 		questionDisp = new JTextField(20);
 		questionDisp.setEnabled(false);
-		
+
 		livesDisp = new JTextField(5);
 		livesDisp.setEnabled(false);
-		
+
 		setLayout(new GridLayout(0,1));
 		graphicsPanel = new ImagePanel();
 		graphicsPanel.updateCurrentRock(0);
 		add(graphicsPanel);
-		
+
 		JPanel bottom = new JPanel();
 		bottom.setLayout(new GridLayout(1,0));
 		playerStatus = createPlayerStatusPanel();
@@ -71,24 +67,27 @@ public class GameGUI extends JFrame {
 		bottom.add(questionPanel);
 		add(bottom);
 	}
-	
+
 	public class ImagePanel extends JPanel{
-		private int playerX = 0;
-		private int playerY = 0;
+		private int playerX;
+		private int playerY;
 		private MediaTracker tracker;
 		private static final int PADDING = 20;
 		private int boardWidth;
 		private int boardHeight;
 		private int playerWidth;
 		private int playerHeight;
-		
+
 		public ImagePanel() {
-				tracker = new MediaTracker(this);
-				Image player = getImage("/images/player.png",1);
-				Image back = getImage("/images/board.png",0);
-				
-				background = back.getScaledInstance(160, 100, Image.SCALE_FAST);
-				playerSprite = player.getScaledInstance(110, 170,  Image.SCALE_FAST);
+			 playerX = 90;
+			 playerY = 90;
+			
+			tracker = new MediaTracker(this);
+			Image player = getImage("/images/player1.png",1);
+			Image back = getImage("/images/board0.png",0);
+
+			background = back.getScaledInstance(160, 100, Image.SCALE_FAST);
+			playerSprite = player.getScaledInstance(110, 170,  Image.SCALE_FAST);
 		}
 
 		@Override
@@ -97,12 +96,12 @@ public class GameGUI extends JFrame {
 			boardHeight = this.getHeight()-2*PADDING;
 			playerWidth = boardWidth*11/160;
 			playerHeight = boardHeight*17/100;
-			
+
 			g.drawImage(background, PADDING, PADDING, boardWidth, boardHeight, null);
 			//System.out.println(boardWidth*11/160 + ", " + boardHeight);
 			g.drawImage(playerSprite, playerX, playerY, playerWidth, playerHeight, null);
 		}
-		
+
 		/**
 		 * Used if needing to actively change the pixel location of the player.
 		 * It is recommended to use the updateCurrentRock so that the scaling for different window sizes can take affect. 
@@ -114,23 +113,59 @@ public class GameGUI extends JFrame {
 			playerX = x;
 			playerY = y;
 		}
-		
+
 		/**
 		 * Used to change the player location based off the current rock. 
 		 * This will scale for window size. 
 		 * 
 		 * @param rockNumber The number rock the player is on. 0 and 11 for the banks if wanted. 
 		 */
-		public void updateCurrentRock(int rockNumber) {
+		private void updateCurrentRock(int rockNumber) {
 			switch (rockNumber) { //TODO add the switch functionality. 
-			case 0: playerX = PADDING;
+			case 0: playerX = PADDING + boardWidth * 1/16;
+			playerY = PADDING + boardHeight * 3/8;
+			break;
+			case 1: playerX = PADDING + boardWidth * 1/5;
+			playerY = PADDING + boardHeight * 3/8;
+			break;
+			case 2: playerX = PADDING + boardWidth * 11/40;
+			playerY = PADDING + boardHeight * 9/20;
+			break;
+			case 3: playerX = PADDING + boardWidth * 13/40;
+			playerY = PADDING + boardHeight * 13/40;
+			break;
+			case 4: playerX = PADDING + boardWidth * 3/8;
+			playerY = PADDING + boardHeight * 17/40;
+			break;
+			case 5: playerX = PADDING + boardWidth * 9/20;
+			playerY = PADDING + boardHeight * 3/10;
+			break;
+			case 6: playerX = PADDING + boardWidth * 41/80;
+			playerY = PADDING + boardHeight * 17/40;
+			break;
+			case 7: playerX = PADDING + boardWidth * 3/5;
+			playerY = PADDING + boardHeight * 13/40;
+			break;
+			case 8: playerX = PADDING + boardWidth * 53/80;
+			playerY = PADDING + boardHeight * 19/40;
+			break;
+			case 9: playerX = PADDING + boardWidth * 59/80;
+			playerY = PADDING + boardHeight * 7/20;
+			break;
+			case 10: playerX = PADDING + boardWidth * 4/5;
+			playerY = PADDING + boardHeight * 19/40;
+			break;
+			case 11: playerX = PADDING + boardWidth * 71/80;
+			playerY = PADDING + boardHeight * 3/8;
+			break;
+
+			default: playerX = PADDING;
 			playerY = PADDING;
 			break;
-			default: break;
 			}
 			repaint();
 		}
-		
+
 		/**
 		 * Used to load a image from a given path. 
 		 * 
@@ -154,16 +189,22 @@ public class GameGUI extends JFrame {
 		qPanel.setLayout(new GridLayout(0,1));
 		TitledBorder questionBorder = new TitledBorder("Question");
 		qPanel.setBorder(questionBorder);
+<<<<<<< HEAD
 		group = new ButtonGroup();
 		
+=======
+		final ButtonGroup group = new ButtonGroup();
+
+>>>>>>> 74ab85d749efb1ee7f9aa904ff3c90161b7532a2
 		qPanel.add(questionDisp);
-		
+
 		for (JRadioButton button : buttons) {
 			button.setActionCommand(button.getText());
 			System.out.println("button " + button.getText());
 			group.add(button);
 			qPanel.add(button);
 		}
+<<<<<<< HEAD
 		
 		submit = new JButton("Submit");
 		submit.setActionCommand("Submit");
@@ -185,13 +226,38 @@ public class GameGUI extends JFrame {
 //			}
 //		});
 		
+=======
+
+		JButton submit = new JButton("Submit");
+		submit.setActionCommand("Submit");
+		qPanel.add(submit);
+
+		submit.addActionListener(new ActionListener() {
+			//		@Overrride
+			public void actionPerformed(ActionEvent e){
+				String pressed = group.getSelection().getActionCommand();
+				System.out.println("Button pressed " + pressed);
+				if (pressed.equals(answer)){
+					System.out.println("correct");
+					return;
+				}
+				else {
+					System.out.println("incorrect");
+					return;
+				}
+
+			}
+		});
+
+
+>>>>>>> 74ab85d749efb1ee7f9aa904ff3c90161b7532a2
 		return qPanel;
 	}
-	
+
 	private JPanel createPlayerStatusPanel() {
 		JPanel sPanel = new JPanel();
 		sPanel.setLayout(new GridLayout(0,1));
-		
+
 		TitledBorder statusBorder = new TitledBorder("Player Status");
 		JLabel timeLabel = new JLabel("Time Remaining");
 		JLabel livesLabel = new JLabel("Lives Remaining");
@@ -200,7 +266,7 @@ public class GameGUI extends JFrame {
 		sPanel.add(timeDisp);
 		sPanel.add(livesLabel);
 		sPanel.add(livesDisp);
-		
+
 		return sPanel;
 	}
 
@@ -208,6 +274,7 @@ public class GameGUI extends JFrame {
 		timeDisp.setText(Integer.toString(time));		
 		repaint();
 	}
+<<<<<<< HEAD
 	public Question pickQuestion(ArrayList<Question> q){
 		Question questionReturned = new Question();
 		if (gameGUIQuestions.size() > 0){
@@ -244,6 +311,10 @@ public class GameGUI extends JFrame {
 		});
 	}
 	public void updateQuestion(Question question){
+=======
+
+	public void updateQuestion(Question question) {
+>>>>>>> 74ab85d749efb1ee7f9aa904ff3c90161b7532a2
 		questionDisp.setText(question.getQuestion());
 		int i=0;
 		answer = question.getCorrectAnswer().toString();
@@ -255,7 +326,7 @@ public class GameGUI extends JFrame {
 		}
 		repaint();
 	}
-	
+
 	public void updateStatus(Player player) {
 		// Update Lives and Location, or end game if Player has run out of lives
 		if (player.getLivesRemaining() > 0) {
@@ -268,5 +339,15 @@ public class GameGUI extends JFrame {
 		}
 		repaint();
 	}
-	
+
+	/**
+	 * Used to change the player location based off the current rock. 
+	 * This will scale for window size. 
+	 * 
+	 * @param rockNumber The number rock the player is on. 0 and 11 for the banks if wanted. 
+	 */
+	public void updatePlayerRock(int rockNumber) {
+		graphicsPanel.updateCurrentRock(rockNumber);
+	}
+
 }
