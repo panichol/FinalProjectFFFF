@@ -80,12 +80,12 @@ public class GameGUI extends JFrame {
 		private int boardHeight;
 		private int playerWidth;
 		private int playerHeight;
-		private boolean hasDrawn;
+		private boolean startingLevel;
 
 		public ImagePanel() {
 			 playerX = 90;
 			 playerY = 90;
-			 hasDrawn = false;
+			 startingLevel = true;
 			 System.out.println("THIS IS PLAYER LOCATION: " + playerX + ", " + playerY);
 			
 			tracker = new MediaTracker(this);
@@ -103,9 +103,9 @@ public class GameGUI extends JFrame {
 			playerWidth = boardWidth*11/160;
 			playerHeight = boardHeight*17/100;
 			
-			if(!hasDrawn){
+			if(startingLevel){
 				updateCurrentRock(0);
-				hasDrawn = true;
+				startingLevel = !startingLevel;
 			}
 			
 			g.drawImage(background, PADDING, PADDING, boardWidth, boardHeight, null);
@@ -346,6 +346,13 @@ public class GameGUI extends JFrame {
 	 */
 	public void updatePlayerRock(int rockNumber) {
 		graphicsPanel.updateCurrentRock(rockNumber);
+	}
+	
+	/**
+	 * Used to start the player off in the initial location when reloading for a new level
+	 */
+	public void startLevel() {
+		graphicsPanel.startingLevel = true;
 	}
 
 }
