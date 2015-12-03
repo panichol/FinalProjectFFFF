@@ -189,13 +189,11 @@ public class GameGUI extends JFrame {
 		qPanel.setLayout(new GridLayout(0,1));
 		TitledBorder questionBorder = new TitledBorder("Question");
 		qPanel.setBorder(questionBorder);
-<<<<<<< HEAD
+
 		group = new ButtonGroup();
 		
-=======
 		final ButtonGroup group = new ButtonGroup();
 
->>>>>>> 74ab85d749efb1ee7f9aa904ff3c90161b7532a2
 		qPanel.add(questionDisp);
 
 		for (JRadioButton button : buttons) {
@@ -204,7 +202,6 @@ public class GameGUI extends JFrame {
 			group.add(button);
 			qPanel.add(button);
 		}
-<<<<<<< HEAD
 		
 		submit = new JButton("Submit");
 		submit.setActionCommand("Submit");
@@ -225,8 +222,7 @@ public class GameGUI extends JFrame {
 //				
 //			}
 //		});
-		
-=======
+
 
 		JButton submit = new JButton("Submit");
 		submit.setActionCommand("Submit");
@@ -249,8 +245,6 @@ public class GameGUI extends JFrame {
 			}
 		});
 
-
->>>>>>> 74ab85d749efb1ee7f9aa904ff3c90161b7532a2
 		return qPanel;
 	}
 
@@ -274,7 +268,7 @@ public class GameGUI extends JFrame {
 		timeDisp.setText(Integer.toString(time));		
 		repaint();
 	}
-<<<<<<< HEAD
+
 	public Question pickQuestion(ArrayList<Question> q){
 		Question questionReturned = new Question();
 		if (gameGUIQuestions.size() > 0){
@@ -310,11 +304,8 @@ public class GameGUI extends JFrame {
 			}
 		});
 	}
-	public void updateQuestion(Question question){
-=======
 
 	public void updateQuestion(Question question) {
->>>>>>> 74ab85d749efb1ee7f9aa904ff3c90161b7532a2
 		questionDisp.setText(question.getQuestion());
 		int i=0;
 		answer = question.getCorrectAnswer().toString();
