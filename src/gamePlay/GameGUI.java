@@ -84,6 +84,7 @@ public class GameGUI extends JFrame {
 		public ImagePanel() {
 			 playerX = 90;
 			 playerY = 90;
+			 //System.out.println("THIS IS PLAYER LOCATION: " + playerX + ", " + playerY);
 			
 			tracker = new MediaTracker(this);
 			Image player = getImage("/images/player1.png",1);
@@ -101,7 +102,7 @@ public class GameGUI extends JFrame {
 			playerHeight = boardHeight*17/100;
 
 			g.drawImage(background, PADDING, PADDING, boardWidth, boardHeight, null);
-			//System.out.println(playerX + ", " + playerY);
+			//System.out.println("THIS IS ALSO LOCATION: " + playerX + ", " + playerY);
 			g.drawImage(playerSprite, playerX, playerY, playerWidth, playerHeight, null);
 		}
 
