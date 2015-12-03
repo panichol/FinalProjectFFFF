@@ -47,12 +47,15 @@ public class GameGUI extends JFrame {
 
 		timeDisp = new JTextField(20);
 		timeDisp.setEnabled(false);
+		timeDisp.setDisabledTextColor(Color.BLACK);
 
 		questionDisp = new JTextField(20);
 		questionDisp.setEnabled(false);
+		questionDisp.setDisabledTextColor(Color.BLACK);
 
 		livesDisp = new JTextField(5);
 		livesDisp.setEnabled(false);
+		livesDisp.setDisabledTextColor(Color.BLACK);
 
 		setLayout(new GridLayout(0,1));
 		graphicsPanel = new ImagePanel();
@@ -98,7 +101,7 @@ public class GameGUI extends JFrame {
 			playerHeight = boardHeight*17/100;
 
 			g.drawImage(background, PADDING, PADDING, boardWidth, boardHeight, null);
-			//System.out.println(boardWidth*11/160 + ", " + boardHeight);
+			//System.out.println(playerX + ", " + playerY);
 			g.drawImage(playerSprite, playerX, playerY, playerWidth, playerHeight, null);
 		}
 

@@ -179,7 +179,7 @@ public class GameEngine {
 			if(timeLeft > 0)
 			{
 				//System.out.println("Time left is " + timeLeft);
-//				gui.updatePlayerRock(11-timeLeft);
+				gui.updatePlayerRock(11-timeLeft);
 				timeLeft--;
 				gui.updateTime(timeLeft);
 				
@@ -189,7 +189,7 @@ public class GameEngine {
 				//TODO what happens when the time is up here.
 				player.loseLife();
 				gui.updateStatus(player);
-//				gui.updatePlayerRock(11);
+				gui.updatePlayerRock(11);
 				resetTimer();
 			}
 		}
@@ -254,7 +254,8 @@ public class GameEngine {
 				, "Welcome", JOptionPane.INFORMATION_MESSAGE);
 		game.gui.setVisible(true);
 		game.gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+		game.gui.updateStatus(game.player);
+		
 		GameEngine.startTimer();
 		
 		for (int i = 0; i < 13; i++) {
