@@ -80,18 +80,20 @@ public class GameGUI extends JFrame {
 		private int boardHeight;
 		private int playerWidth;
 		private int playerHeight;
+		private boolean hasDrawn;
 
 		public ImagePanel() {
 			 playerX = 90;
 			 playerY = 90;
-			 //System.out.println("THIS IS PLAYER LOCATION: " + playerX + ", " + playerY);
+			 hasDrawn = false;
+			 System.out.println("THIS IS PLAYER LOCATION: " + playerX + ", " + playerY);
 			
 			tracker = new MediaTracker(this);
-			Image player = getImage("/images/player1.png",1);
-			Image back = getImage("/images/board0.png",0);
+			playerSprite = getImage("/images/player1.png",1);
+			background = getImage("/images/board0.png",0);
 
-			background = back.getScaledInstance(160, 100, Image.SCALE_FAST);
-			playerSprite = player.getScaledInstance(110, 170,  Image.SCALE_FAST);
+			background = background.getScaledInstance(160, 100, Image.SCALE_FAST);
+			playerSprite = playerSprite.getScaledInstance(11, 17,  Image.SCALE_FAST);
 		}
 
 		@Override
@@ -100,7 +102,12 @@ public class GameGUI extends JFrame {
 			boardHeight = this.getHeight()-2*PADDING;
 			playerWidth = boardWidth*11/160;
 			playerHeight = boardHeight*17/100;
-
+			
+			if(!hasDrawn){
+				updateCurrentRock(0);
+				hasDrawn = true;
+			}
+			
 			g.drawImage(background, PADDING, PADDING, boardWidth, boardHeight, null);
 			//System.out.println("THIS IS ALSO LOCATION: " + playerX + ", " + playerY);
 			g.drawImage(playerSprite, playerX, playerY, playerWidth, playerHeight, null);
