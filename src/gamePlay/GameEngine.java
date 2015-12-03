@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
@@ -43,7 +44,8 @@ public class GameEngine {
 	
 	public void loadQuestionFile(String fileName) throws BadFormatException{
 		try{
-			FileReader reader = new FileReader(fileName);
+			//FileReader reader = new FileReader(fileName);
+			InputStream reader = getClass().getResourceAsStream(fileName);
 			Scanner in = new Scanner(reader);
 			//////////////////
 			//int numQuestions = Integer.parseInt(in.nextLine());			//TODO MAKE WORK
@@ -128,12 +130,12 @@ public class GameEngine {
 				}
 			}
 		}
-		catch (FileNotFoundException fnfe) {
-				System.out.println("File not found.");
-		}
 		catch (BadFormatException bfe) {
 			BadFormatException ex = new BadFormatException(bfe.getMessage());
 			throw ex;
+		}
+		catch (Exception fnfe) {
+				System.out.println("File not found.");
 		}
 	}
 
@@ -258,7 +260,7 @@ public class GameEngine {
 	
 	public static void main(String args[]) throws BadFormatException {
 		GameEngine game = new GameEngine();
-		game.loadQuestionFile("input.txt");
+		game.loadQuestionFile("/data/input.txt");
 		JOptionPane.showMessageDialog(gui, "Welcome to Fraction Flash Flood - please press OK to continue"
 				, "Welcome", JOptionPane.INFORMATION_MESSAGE);
 		game.gui.setVisible(true);
