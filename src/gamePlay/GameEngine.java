@@ -132,8 +132,12 @@ public class GameEngine {
 		return playerAnswer;
 	}
 
+//	public boolean askQuestion(){//asks the player a question , and returns whether or not they got it right
+//		return GameEngine.gui.updateQuestion(getQuestion());//return whether or not the player got the question right
+//	}
+	
 	public boolean askQuestion(){//asks the player a question , and returns whether or not they got it right
-		GameEngine.gui.updateQuestion(getQuestion());
+		GameEngine.gui.updateQuestion(getQuestionsArray());
 		return false;//return whether or not the player got the question right
 	}
 
@@ -241,10 +245,14 @@ public class GameEngine {
 				, "Welcome", JOptionPane.INFORMATION_MESSAGE);
 		GameEngine.gui.setVisible(true);
 		
-		for (int i = 0; i < 13; i++){
+		for (int i = 0; i < 13; i++) {
+			System.out.println("here");
 			if (game.player.getLivesRemaining() > 0){
 				Question q = game.getQuestion();
-				game.askQuestion();
+				boolean correct = game.askQuestion();
+				
+			//	GameEngine.gui.updateQuestion(game.getQuestion());
+				GameEngine.gui.setVisible(true);
 			}
 		}
 	}
