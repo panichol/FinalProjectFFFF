@@ -7,7 +7,6 @@ import java.net.URL;
 import java.util.ArrayList;
 
 import javax.swing.ButtonGroup;
-import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -15,29 +14,33 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
-import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 
 public class GameGUI extends JFrame {
-	private ImagePanel graphicsPanel;
-	private JPanel questionPanel;
-	private JPanel playerStatus;
-	private JTextField timeDisp;
-	private JTextField questionDisp;
-	private JTextField livesDisp;
-	private ArrayList<JRadioButton> buttons;
-	private String answer = "";
+	private ImagePanel graphicsPanel;				//The graphical panel that has the actual images. 
+	private JPanel questionPanel;					//The questions panel that displays the question and possible answers.
+	private JPanel playerStatus;					//The panel that shows the player's information. 
+	private JTextField timeDisp;					//The area that displays the time left. 
+	private JTextField questionDisp;				//The actual individual question area. 
+	private JTextField livesDisp;					//The lives display area. 
+	private ArrayList<JRadioButton> buttons;		//The buttons of the answers.
+	private ButtonGroup group;						//The button group that will hold the answer buttons. 
+	private JButton submit;							//The submit button
+	private String answer = "";						//Temporary variable that holds the answer that was selected. 
+	private boolean correct;						//The boolean that tells if the player has submitted a correct answer. 
+	private boolean clicked;						//The boolean that tells if the submit button has been clicked.
+	private ArrayList<Question> gameGUIQuestions;	//The list of questions.
+	private int questionCounter; 					//counter used between loops in submit function
 	//Image stuff
-	private Image playerSprite;
-	private Image background;
-	private JButton submit;
-	private ButtonGroup group;
-	private boolean correct = false;
-	private boolean clicked;
-	private ArrayList<Question> gameGUIQuestions;
-	private int questionCounter; //counter used between loops in submit function
-
+	private Image playerSprite;						//The Player's Sprite. 
+	private Image background;						//The background image.
+	
+	/**
+	 * Default initializer. 
+	 * Sets up all the different fields and places them. 
+	 */
 	public GameGUI() {
+		correct = false;
 		questionCounter = 0;
 		setSize(600,800);
 		buttons = new ArrayList<JRadioButton>();
@@ -70,7 +73,7 @@ public class GameGUI extends JFrame {
 		bottom.add(questionPanel);
 		add(bottom);
 	}
-
+	
 	public class ImagePanel extends JPanel{
 		private int playerX;
 		private int playerY;
@@ -81,12 +84,16 @@ public class GameGUI extends JFrame {
 		private int playerWidth;
 		private int playerHeight;
 		private boolean startingLevel;
-
+		
+		/**
+		 * Default constructor. 
+		 * Places the images on the screen. 
+		 */
 		public ImagePanel() {
 			 playerX = 90;
 			 playerY = 90;
 			 startingLevel = true;
-			 System.out.println("THIS IS PLAYER LOCATION: " + playerX + ", " + playerY);
+			 //System.out.println("THIS IS PLAYER LOCATION: " + playerX + ", " + playerY);
 			
 			tracker = new MediaTracker(this);
 			playerSprite = getImage("/images/player1.png",1);
@@ -95,7 +102,12 @@ public class GameGUI extends JFrame {
 			background = background.getScaledInstance(160, 100, Image.SCALE_FAST);
 			playerSprite = playerSprite.getScaledInstance(11, 17,  Image.SCALE_FAST);
 		}
-
+		
+		/**
+		 * Paints the actual components. If there is a graphical derp it probably happened in here. 
+		 * This is called when repaint is called.
+		 * @param g The graphical component that does the drawing. 
+		 */
 		@Override
 		public void paintComponent(Graphics g) {
 			boardWidth = this.getWidth()-2*PADDING;
@@ -132,7 +144,7 @@ public class GameGUI extends JFrame {
 		 * @param rockNumber The number rock the player is on. 0 and 11 for the banks if wanted. 
 		 */
 		private void updateCurrentRock(int rockNumber) {
-			switch (rockNumber) { //TODO add the switch functionality. 
+			switch (rockNumber) {
 			case 0: playerX = PADDING + boardWidth * 1/16;
 			playerY = PADDING + boardHeight * 3/8;
 			break;
@@ -187,14 +199,19 @@ public class GameGUI extends JFrame {
 		private Image getImage(String pathName, int id) {
 			URL url = getClass().getResource(pathName);
 			Image image = Toolkit.getDefaultToolkit().getImage(url);
-			tracker.addImage(image, id); //TODO ensure that this will always allow for the images to be displayed. 
+			tracker.addImage(image, id);
 			try {
 				tracker.waitForID(id);
 			} catch (InterruptedException e) {  return image; }
 			return image;
 		}
 	}
-
+	
+	/**
+	 * Sets up the panel for the question.
+	 * 
+	 * @return the panel to be placed on the frame. 
+	 */
 	private JPanel createQuestionPanel() {
 		JPanel qPanel = new JPanel();
 		qPanel.setLayout(new GridLayout(0,1));
@@ -252,7 +269,12 @@ public class GameGUI extends JFrame {
 
 		return qPanel;
 	}
-
+	
+	/**
+	 * Creates the panel that displays player status. 
+	 * 
+	 * @return the panel to be displayed on the frame. 
+	 */
 	private JPanel createPlayerStatusPanel() {
 		JPanel sPanel = new JPanel();
 		sPanel.setLayout(new GridLayout(0,1));
@@ -268,12 +290,23 @@ public class GameGUI extends JFrame {
 
 		return sPanel;
 	}
-
+	
+	/**
+	 * Given a time, this will update the time field on the player panel. 
+	 * 
+	 * @param time The time to be displayed. 
+	 */
 	public void updateTime(int time) {
 		timeDisp.setText(Integer.toString(time));		
 		repaint();
 	}
-
+	
+	/**
+	 * Updates the current question from the list of questions. 
+	 * 
+	 * @param q The list of questions to take the first question from. This is edited to remove the first question. 
+	 * @return the question to be displayed. 
+	 */
 	public Question pickQuestion(ArrayList<Question> q){
 		Question questionReturned = new Question();
 		if (gameGUIQuestions.size() > 0){
@@ -282,36 +315,47 @@ public class GameGUI extends JFrame {
 		}
 		return questionReturned;
 	}
+	
+	/**
+	 * Adds the functionality for the question button. 
+	 * 
+	 * @param q The list of questions. 
+	 */
 	public void updateQuestion(ArrayList<Question> q) {
 		gameGUIQuestions = q;
 		clicked = false;
-		updateQuestion(pickQuestion(gameGUIQuestions));
-		System.out.println(pickQuestion(gameGUIQuestions).getCorrectAnswer());
+		updateQuestionField(pickQuestion(gameGUIQuestions));
+		System.out.println(pickQuestion(gameGUIQuestions).getCorrectAnswer()); //TODO remove this for final presentation
 		submit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
 				String actionCommand = ((JButton) e.getSource()).getActionCommand();
-				System.out.println("Action command for pressed button: " + actionCommand);
+				System.out.println("Action command for pressed button: " + actionCommand); //TODO remove this for final presentation
 //				clicked = true;
 				if (actionCommand.equals("Submit")){
 					String pressed = group.getSelection().getActionCommand();
 					System.out.println("Button pressed " + pressed);
 					if (pressed.equals(answer)){	
-						//To Do: add in player status updates
-						System.out.println("correct" + questionCounter);
-						updateQuestion(pickQuestion(gameGUIQuestions));
+						//TODO: add in player status updates
+						System.out.println("correct" + questionCounter); //TODO remove this for final presentation
+						updateQuestionField(pickQuestion(gameGUIQuestions));
 						correct = true;
 					}
 					else {
 						//To Do: add in player status updates
-						updateQuestion(pickQuestion(gameGUIQuestions));
+						updateQuestionField(pickQuestion(gameGUIQuestions));
 						correct = false;
 					}
 				}
 			}
 		});
 	}
-
-	public void updateQuestion(Question question) {
+	
+	/**
+	 * Updates the question field to have the question.
+	 * 
+	 * @param question the Question to be displayed. 
+	 */
+	public void updateQuestionField(Question question) {
 		group.clearSelection();
 		questionDisp.setText(question.getQuestion());
 		int i=0;
@@ -324,9 +368,13 @@ public class GameGUI extends JFrame {
 		}
 		repaint();
 	}
-
+	
+	/**
+	 * Update Lives and Location, or end game if Player has run out of lives. 
+	 * 
+	 * @param player The player object whose information is displayed. 
+	 */
 	public void updateStatus(Player player) {
-		// Update Lives and Location, or end game if Player has run out of lives
 		if (player.getLivesRemaining() > 0) {
 			livesDisp.setText(Integer.toString(player.getLivesRemaining()));
 		}
