@@ -34,6 +34,7 @@ public class GameGUI extends JFrame {
 	private boolean clicked;						//The boolean that tells if the submit button has been clicked.
 	private ArrayList<Question> gameGUIQuestions;	//The list of questions.
 	private static Player player;
+	public int rock;
 
 	//Image stuff
 	private Image playerSprite;						//The Player's Sprite. 
@@ -45,6 +46,7 @@ public class GameGUI extends JFrame {
 	 */
 	public GameGUI(Player p) {
 		player = p;
+		rock = 0;
 		correct = false;
 		setSize(600,800);
 		buttons = new ArrayList<JRadioButton>();
@@ -189,6 +191,7 @@ public class GameGUI extends JFrame {
 			playerY = PADDING + boardHeight * 3/8;
 			JOptionPane.showMessageDialog(graphicsPanel,"Congratulations! You won Fraction Flash Flood!"
 					,"Congratulations!",JOptionPane.INFORMATION_MESSAGE);
+			System.exit(0);
 			break;
 
 			default: playerX = PADDING;
@@ -336,14 +339,17 @@ public class GameGUI extends JFrame {
 				updateAnswerOutcome(correct, answer);
 				updateQuestionField(pickQuestion(gameGUIQuestions));
 				correct = true;
+				rock++;
+				//System.out.println(rock);
+				updatePlayerRock(rock);
 			}
 			else {
 				player.loseLife();
-				updateStatus();
 				updateAnswerOutcome(correct, answer);
 				updateQuestionField(pickQuestion(gameGUIQuestions));
 				correct = false;
 			}
+			updateStatus();
 		}
 	}
 	
@@ -373,7 +379,7 @@ public class GameGUI extends JFrame {
 	 */
 	public void updateStatus() {
 		livesDisp.setText(Integer.toString(player.getLivesRemaining()));
-		if (player.getLivesRemaining() <= 0) {
+		if (player.getLivesRemaining() == 0) {
 			JOptionPane.showMessageDialog(getParent(), "Sorry, you have run out of lives!"
 					, "Game Over", JOptionPane.INFORMATION_MESSAGE);
 			System.exit(0);
