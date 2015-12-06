@@ -185,7 +185,6 @@ public class GameEngine {
 			{
 				timeLeft--;
 				gui.updateTime(timeLeft);
-				
 				gui.repaint();
 			}
 			else {

@@ -95,6 +95,7 @@ public class GameGUI extends JFrame {
 		private int playerWidth;
 		private int playerHeight;
 		private boolean startingLevel;
+		private boolean backgroundBool;
 
 		/**
 		 * Default constructor. 
@@ -108,9 +109,11 @@ public class GameGUI extends JFrame {
 
 			tracker = new MediaTracker(this);
 			playerSprite = getImage("/images/player1.png",1);
-			background0 = getImage("/images/board0.png",0);
+			background0 = getImage("/images/BoardWave1.png",0);
+			background1 = getImage("/images/BoardWave2.png",0);
 
 			background0 = background0.getScaledInstance(160, 100, Image.SCALE_FAST);
+			background1 = background1.getScaledInstance(160, 100, Image.SCALE_FAST);
 			playerSprite = playerSprite.getScaledInstance(11, 17,  Image.SCALE_FAST);
 		}
 
@@ -131,7 +134,14 @@ public class GameGUI extends JFrame {
 				startingLevel = !startingLevel;
 			}
 
-			g.drawImage(background0, PADDING, PADDING, boardWidth, boardHeight, null);
+			if(backgroundBool){
+				g.drawImage(background0, PADDING, PADDING, boardWidth, boardHeight, null);
+				backgroundBool = !backgroundBool;
+			}
+			else{
+				g.drawImage(background1, PADDING, PADDING, boardWidth, boardHeight, null);
+				backgroundBool = !backgroundBool;
+			}
 			g.drawImage(playerSprite, playerX, playerY, playerWidth, playerHeight, null);
 		}
 
@@ -404,5 +414,7 @@ public class GameGUI extends JFrame {
 	public void startLevel() {
 		graphicsPanel.startingLevel = true;
 	}
+
+	
 
 }
