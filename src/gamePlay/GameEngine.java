@@ -36,7 +36,7 @@ public class GameEngine {
 		timeLeft = startTime;
 		timeRemaining = true;
 		timer = new Timer(1000, new TimerListener());
-		gui = new GameGUI();
+		gui = new GameGUI(player);
 		questions = new ArrayList<Question>();
 		
 		//gui.updatePlayerRock(10);
@@ -143,7 +143,7 @@ public class GameEngine {
 	}*/
 	
 	public boolean askQuestion(){//asks the player a question , and returns whether or not they got it right
-		GameEngine.gui.updateQuestion(getQuestionsArray(), player);
+		GameEngine.gui.updateQuestion(getQuestionsArray());
 		return false;//return whether or not the player got the question right
 	}
 
@@ -192,7 +192,7 @@ public class GameEngine {
 			else {
 				//TODO what happens when the time is up here.
 				player.loseLife();
-				gui.updateStatus(player);
+				gui.updateStatus();
 				gui.updatePlayerRock(11);
 				resetTimer();
 			}
@@ -258,14 +258,14 @@ public class GameEngine {
 				, "Welcome", JOptionPane.INFORMATION_MESSAGE);
 		game.gui.setVisible(true);
 		game.gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		game.gui.updateStatus(game.player);
+		game.gui.updateStatus();
 		
 		GameEngine.startTimer();
 			if (game.player.getLivesRemaining() > 0){
 				Question q = game.getQuestion();
 				boolean correct = game.askQuestion();
 				
-				GameEngine.gui.updateQuestionField(game.getQuestion());
+				//GameEngine.gui.updateQuestionField(game.getQuestion());
 				GameEngine.gui.setVisible(true);
 			}
 	}

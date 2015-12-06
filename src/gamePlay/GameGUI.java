@@ -5,6 +5,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Random;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -30,6 +32,7 @@ public class GameGUI extends JFrame {
 	private boolean correct;						//The boolean that tells if the player has submitted a correct answer. 
 	private boolean clicked;						//The boolean that tells if the submit button has been clicked.
 	private ArrayList<Question> gameGUIQuestions;	//The list of questions.
+	private static Player player;
 
 	//Image stuff
 	private Image playerSprite;						//The Player's Sprite. 
@@ -39,7 +42,8 @@ public class GameGUI extends JFrame {
 	 * Default initializer. 
 	 * Sets up all the different fields and places them. 
 	 */
-	public GameGUI() {
+	public GameGUI(Player p) {
+		player = p;
 		correct = false;
 		setSize(600,800);
 		buttons = new ArrayList<JRadioButton>();
@@ -274,6 +278,8 @@ public class GameGUI extends JFrame {
 	 */
 	public Question pickQuestion(ArrayList<Question> q){
 		Question questionReturned = new Question();
+		Random r = new Random();
+		Collections.rotate(q,r.nextInt(q.size()));
 		if (gameGUIQuestions.size() > 0){
 			questionReturned = gameGUIQuestions.get(0);
 			gameGUIQuestions.remove(0);
@@ -286,11 +292,12 @@ public class GameGUI extends JFrame {
 	 * 
 	 * @param q The list of questions. 
 	 */
-	public void updateQuestion(ArrayList<Question> q, final Player p) {
+	public void updateQuestion(ArrayList<Question> q) {
 		gameGUIQuestions = q;
 		clicked = false;
 		Question currentQuestion = pickQuestion(gameGUIQuestions);
 		updateQuestionField(currentQuestion);
+		//System.out.println(currentQuestion);
 		System.out.println("Correct answer: " + currentQuestion.getCorrectAnswer()); //TODO remove this for final presentation
 		submit.addActionListener(new questionListener());
 	}
@@ -301,6 +308,7 @@ public class GameGUI extends JFrame {
 	private class questionListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			//System.out.println("THIS IS HAPPENEING");
 			String pressed = group.getSelection().getActionCommand();
 			System.out.println("Button pressed " + pressed);
 			if (pressed.equals(answer)){	
@@ -310,7 +318,8 @@ public class GameGUI extends JFrame {
 				correct = true;
 			}
 			else {
-				//TODO: add in player status updates
+				player.loseLife();
+				updateStatus();
 				updateQuestionField(pickQuestion(gameGUIQuestions));
 				correct = false;
 			}
@@ -323,6 +332,7 @@ public class GameGUI extends JFrame {
 	 * @param question the Question to be displayed. 
 	 */
 	public void updateQuestionField(Question question) {
+		System.out.println(question);
 		group.clearSelection();
 		questionDisp.setText(question.getQuestion());
 		int i=0;
@@ -340,11 +350,9 @@ public class GameGUI extends JFrame {
 	 * 
 	 * @param player The player object whose information is displayed. 
 	 */
-	public void updateStatus(Player player) {
-		if (player.getLivesRemaining() > 0) {
-			livesDisp.setText(Integer.toString(player.getLivesRemaining()));
-		}
-		else {
+	public void updateStatus() {
+		livesDisp.setText(Integer.toString(player.getLivesRemaining()));
+		if (player.getLivesRemaining() <= 0) {
 			JOptionPane.showMessageDialog(getParent(), "Sorry, you have run out of lives!"
 					, "Game Over", JOptionPane.INFORMATION_MESSAGE);
 			System.exit(0);
