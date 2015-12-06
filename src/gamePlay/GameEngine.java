@@ -47,9 +47,7 @@ public class GameEngine {
 		try{
 			InputStream reader = getClass().getResourceAsStream(fileName);
 			Scanner in = new Scanner(reader);
-			//////////////////
-			//int numQuestions = Integer.parseInt(in.nextLine());			//TODO MAKE WORK
-			//////////////////
+
 			int numQuestions = 20;
 			in.nextLine();
 			
@@ -62,7 +60,7 @@ public class GameEngine {
 				Fraction f2 = new Fraction();
 				Fraction f3 = new Fraction();
 				Fraction f4 = new Fraction();
-				if (in.hasNextLine()){				//TODO Refactor
+				if (in.hasNextLine()){				
 					countLines = 0;
 					String a = in.nextLine();
 					String[] divisionTest = a.split("~");	//Reading in a "�" is difficult, so we replace all � with ~ in the file, 
@@ -169,7 +167,7 @@ public class GameEngine {
 
 	}
 
-	public Question getQuestion() {//TODO he questions list should be shuffled when it is loaded in
+	public Question getQuestion() {
 		Collections.rotate(questions, 1);
 		return questions.get(1);
 	}
@@ -189,7 +187,7 @@ public class GameEngine {
 				gui.repaint();
 			}
 			else {
-				//TODO what happens when the time is up here.
+				
 				player.loseAllLives();
 				gui.updateStatus();
 				//resetTimer();
@@ -272,7 +270,6 @@ public class GameEngine {
 				try {
 					TimeUnit.SECONDS.sleep(1);
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}

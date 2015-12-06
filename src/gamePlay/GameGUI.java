@@ -342,7 +342,7 @@ public class GameGUI extends JFrame {
 		Question currentQuestion = pickQuestion(gameGUIQuestions);
 		updateQuestionField(currentQuestion);
 		//System.out.println(currentQuestion);
-		System.out.println("Correct answer: " + currentQuestion.getCorrectAnswer()); //TODO remove this for final presentation
+		
 		submit.addActionListener(new questionListener());
 	}
 	
@@ -357,15 +357,13 @@ public class GameGUI extends JFrame {
 				return;
 			}
 			String pressed = group.getSelection().getActionCommand();
-			System.out.println("Button pressed " + pressed);
+			
 			if (pressed.equals(answer)){	
-				//TODO: add in player status updates
-				System.out.println("Correct"); //TODO remove this for final presentation
 				correct = true;
 				updateAnswerOutcome(correct, answer);
 				updateQuestionField(pickQuestion(gameGUIQuestions));
 				rock++;
-				//System.out.println(rock);
+				;
 				updatePlayerRock(rock);
 			}
 			else {
@@ -384,7 +382,7 @@ public class GameGUI extends JFrame {
 	 * @param question the Question to be displayed. 
 	 */
 	public void updateQuestionField(Question question) {
-		System.out.println(question);
+
 		group.clearSelection();
 		questionDisp.setText(question.getQuestion());
 		int i=0;

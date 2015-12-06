@@ -44,7 +44,7 @@ private int livesRemaining;
 			//return false;
 		}
 		livesRemaining--;
-		System.out.println("lives remaining " + livesRemaining);
+		//System.out.println("lives remaining " + livesRemaining);
 		//return true;
 	}
 
