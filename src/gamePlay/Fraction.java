@@ -3,7 +3,7 @@ package gamePlay;
 public class Fraction {
 	private int numerator;
 	private int denominator;
-
+	
 	public Fraction(){
 		this.numerator = -1;
 		this.denominator = -1;

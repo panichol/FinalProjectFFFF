@@ -274,7 +274,7 @@ public class GameEngine {
 				Question q = game.getQuestion();
 				boolean correct = game.askQuestion();
 				
-				GameEngine.gui.updateQuestion(game.getQuestion());
+				GameEngine.gui.updateQuestionField(game.getQuestion());
 				GameEngine.gui.setVisible(true);
 			}
 	}
