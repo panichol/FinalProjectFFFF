@@ -108,13 +108,13 @@ public class GameGUI extends JFrame {
 			//System.out.println("THIS IS PLAYER LOCATION: " + playerX + ", " + playerY);
 
 			tracker = new MediaTracker(this);
-			playerSprite = getImage("/images/player1.png",1);
 			background0 = getImage("/images/BoardWave1.png",0);
 			background1 = getImage("/images/BoardWave2.png",0);
+			playerSprite = getImage("/images/player1.png",1);
 
-			background0 = background0.getScaledInstance(160, 100, Image.SCALE_FAST);
-			background1 = background1.getScaledInstance(160, 100, Image.SCALE_FAST);
-			playerSprite = playerSprite.getScaledInstance(11, 17,  Image.SCALE_FAST);
+			//background0 = background0.getScaledInstance(160, 100, Image.SCALE_FAST);
+			//background1 = background1.getScaledInstance(160, 100, Image.SCALE_FAST);
+			//playerSprite = playerSprite.getScaledInstance(11, 17,  Image.SCALE_FAST);
 		}
 
 		/**
@@ -155,7 +155,7 @@ public class GameGUI extends JFrame {
 		public void updatePlayerLocation(int x, int y) {
 			playerX = x;
 			playerY = y;
-		}
+		}	
 
 		/**
 		 * Used to change the player location based off the current rock. 
