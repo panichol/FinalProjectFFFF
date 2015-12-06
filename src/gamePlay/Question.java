@@ -69,7 +69,7 @@ public class Question {
 		return correctAnswer;
 	}
 	public boolean isCorrect(Fraction input){
-		return input == correctAnswer;
+		return input.equals(correctAnswer);
 	}
 	public ArrayList<Fraction> orderAnswers(){
 		Collections.shuffle(sequencedAnswers);

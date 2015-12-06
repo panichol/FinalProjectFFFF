@@ -23,7 +23,7 @@ public class QuestionAnswerTests extends TestCase {
 	}
 	
 	@Test
-	public void answerHandling(){
+	public void testAnswerHandling(){
 		
 		
 		Fraction answer = new Fraction(1, 2);
@@ -33,14 +33,14 @@ public class QuestionAnswerTests extends TestCase {
 		Question q1 = new Question("",answer, false1, false2, false3);
 
 				
-		assertTrue (q1.isCorrect(newGame.getPlayerAnswer()));		//checks that if user selects answer 
-		assertFalse(q1.isCorrect(newGame.getPlayerAnswer()));
+		assertTrue (q1.isCorrect(newGame.getPlayerAnswerTrue()));		//checks that if user selects answer 
+		assertFalse(q1.isCorrect(newGame.getPlayerAnswerFalse()));
 		
 		
 	}
 	
 	@Test 
-	public void randomSequence(){
+	public void testRandomSequence(){
 		Fraction answer = new Fraction(1, 2);
 		Fraction false1 = new Fraction(3, 4);
 		Fraction false2 = new Fraction(3, 4);

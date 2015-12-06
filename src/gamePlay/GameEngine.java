@@ -139,7 +139,13 @@ public class GameEngine {
 		}
 	}
 
-	public Fraction getPlayerAnswer() {
+
+	public Fraction getPlayerAnswerTrue() {
+		playerAnswer = new Fraction(1,2);
+		return playerAnswer;
+	}
+	public Fraction getPlayerAnswerFalse() {
+		playerAnswer = new Fraction (3,2);
 		return playerAnswer;
 	}
 
