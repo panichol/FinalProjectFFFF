@@ -325,6 +325,9 @@ public class GameGUI extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			//System.out.println("THIS IS HAPPENEING");
+			if (group.getSelection() == null){
+				return;
+			}
 			String pressed = group.getSelection().getActionCommand();
 			System.out.println("Button pressed " + pressed);
 			if (pressed.equals(answer)){	
