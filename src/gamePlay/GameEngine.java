@@ -44,7 +44,6 @@ public class GameEngine {
 	
 	public void loadQuestionFile(String fileName) throws BadFormatException{
 		try{
-			//FileReader reader = new FileReader(fileName);
 			InputStream reader = getClass().getResourceAsStream(fileName);
 			Scanner in = new Scanner(reader);
 			//////////////////
@@ -52,11 +51,6 @@ public class GameEngine {
 			//////////////////
 			int numQuestions = 20;
 			in.nextLine();
-//			Question q = new Question();
-//			Fraction f1 = new Fraction();
-//			Fraction f2 = new Fraction();
-//			Fraction f3 = new Fraction();
-//			Fraction f4 = new Fraction();
 			
 			int a1;
 			int a2;
@@ -120,11 +114,6 @@ public class GameEngine {
 					}
 					else{
 						q.sequenceAnswers();
-						System.out.println(q);
-						System.out.println("sequenced " + q.sequencedAnswers.get(0).getNumerator());//TODO remove this for final presentation
-						System.out.println("sequenced " + q.sequencedAnswers.get(1).getNumerator());
-						System.out.println("sequenced " + q.sequencedAnswers.get(2).getNumerator());
-						System.out.println("sequenced " + q.sequencedAnswers.get(3).getNumerator());
 						questions.add(q);
 					}
 				}
@@ -139,7 +128,13 @@ public class GameEngine {
 		}
 	}
 
-	public Fraction getPlayerAnswer() {
+
+	public Fraction getPlayerAnswerTrue() {
+		playerAnswer = new Fraction(1,2);
+		return playerAnswer;
+	}
+	public Fraction getPlayerAnswerFalse() {
+		playerAnswer = new Fraction (3,2);
 		return playerAnswer;
 	}
 
@@ -148,7 +143,7 @@ public class GameEngine {
 	}*/
 	
 	public boolean askQuestion(){//asks the player a question , and returns whether or not they got it right
-		GameEngine.gui.updateQuestion(getQuestionsArray());
+		GameEngine.gui.updateQuestion(getQuestionsArray(), player);
 		return false;//return whether or not the player got the question right
 	}
 
@@ -189,7 +184,6 @@ public class GameEngine {
 			//http://stackoverflow.com/questions/9721066/how-to-display-java-timer-on-a-separate-j-frame-form-label
 			if(timeLeft > 0)
 			{
-				//System.out.println("Time left is " + timeLeft);
 				timeLeft--;
 				gui.updateTime(timeLeft);
 				
@@ -267,8 +261,6 @@ public class GameEngine {
 		game.gui.updateStatus(game.player);
 		
 		GameEngine.startTimer();
-		game.printQuestions();
-			System.out.println("here");
 			if (game.player.getLivesRemaining() > 0){
 				Question q = game.getQuestion();
 				boolean correct = game.askQuestion();

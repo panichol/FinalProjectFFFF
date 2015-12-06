@@ -26,7 +26,6 @@ public class Question {
 		sequencedAnswers.add(falseAnswer1);
 		sequencedAnswers.add(falseAnswer2);
 		sequencedAnswers.add(falseAnswer3);
-//		System.out.println("sequenced q " + correctAnswer.getNumerator());
 
 	}
 	public Question(String question, Fraction correctAnswer,Fraction falseAnswer1,Fraction falseAnswer2,Fraction falseAnswer3){
@@ -40,7 +39,6 @@ public class Question {
 		sequencedAnswers.add(falseAnswer1);
 		sequencedAnswers.add(falseAnswer2);
 		sequencedAnswers.add(falseAnswer3);
-//		System.out.println("sequenced q" + correctAnswer.getNumerator());
 	}
 	
 	public Question(Question other){
@@ -54,7 +52,6 @@ public class Question {
 		sequencedAnswers.add(falseAnswer1);
 		sequencedAnswers.add(falseAnswer2);
 		sequencedAnswers.add(falseAnswer3);
-//		System.out.println("sequenced q" + correctAnswer.getNumerator());
 
 	}
 	public void sequenceAnswers(){
@@ -63,13 +60,12 @@ public class Question {
 		sequencedAnswers.add(falseAnswer1);
 		sequencedAnswers.add(falseAnswer2);
 		sequencedAnswers.add(falseAnswer3);
-//		System.out.println("sequenced " + falseAnswer1.getNumerator());
 	}
 	public Fraction getCorrectAnswer() {
 		return correctAnswer;
 	}
 	public boolean isCorrect(Fraction input){
-		return input == correctAnswer;
+		return input.equals(correctAnswer);
 	}
 	public ArrayList<Fraction> orderAnswers(){
 		Collections.shuffle(sequencedAnswers);

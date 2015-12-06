@@ -120,7 +120,6 @@ public class GameGUI extends JFrame {
 			}
 
 			g.drawImage(background, PADDING, PADDING, boardWidth, boardHeight, null);
-			//System.out.println("THIS IS ALSO LOCATION: " + playerX + ", " + playerY);
 			g.drawImage(playerSprite, playerX, playerY, playerWidth, playerHeight, null);
 		}
 
@@ -225,49 +224,14 @@ public class GameGUI extends JFrame {
 
 		for (JRadioButton button : buttons) {
 			button.setActionCommand(button.getText());
-			System.out.println("button " + button.getText());
 			group.add(button);
 			qPanel.add(button);
 		}
 
-		/*		submit.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e){
-				String pressed = group.getSelection().getActionCommand();
-				System.out.println("Button pressed " + pressed);
-				if (pressed.equals(answer)){	
-					//To Do: add in player status updates
-					System.out.println("correct");
-				}
-				else {
-					//To Do: add in player status updates
-					System.out.println("incorrect");
-				}
-
-			}
-		});*/
-
-
 		submit = new JButton("Submit");
 		submit.setActionCommand("Submit");
 		qPanel.add(submit);
-
-		/*		submit.addActionListener(new ActionListener() {
-			//		@Overrride
-			public void actionPerformed(ActionEvent e){
-				String pressed = group.getSelection().getActionCommand();
-				System.out.println("Button pressed " + pressed);
-				if (pressed.equals(answer)){
-					System.out.println("correct");
-					return;
-				}
-				else {
-					System.out.println("incorrect");
-					return;
-				}
-
-			}
-		});*/
-
+		
 		return qPanel;
 	}
 
@@ -322,7 +286,7 @@ public class GameGUI extends JFrame {
 	 * 
 	 * @param q The list of questions. 
 	 */
-	public void updateQuestion(ArrayList<Question> q) {
+	public void updateQuestion(ArrayList<Question> q, final Player p) {
 		gameGUIQuestions = q;
 		clicked = false;
 		Question currentQuestion = pickQuestion(gameGUIQuestions);
@@ -366,7 +330,6 @@ public class GameGUI extends JFrame {
 		for (Fraction answer : question.orderAnswers()) {
 			buttons.get(i).setText(question.sequencedAnswers.get(i).toString());
 			buttons.get(i).setActionCommand(buttons.get(i).getText());
-			System.out.println("button " + buttons.get(i).getText());//TODO remove for final project
 			i++;
 		}
 		repaint();
