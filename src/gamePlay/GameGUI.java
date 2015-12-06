@@ -121,7 +121,6 @@ public class GameGUI extends JFrame {
 			}
 			
 			g.drawImage(background, PADDING, PADDING, boardWidth, boardHeight, null);
-			//System.out.println("THIS IS ALSO LOCATION: " + playerX + ", " + playerY);
 			g.drawImage(playerSprite, playerX, playerY, playerWidth, playerHeight, null);
 		}
 
@@ -224,48 +223,13 @@ public class GameGUI extends JFrame {
 
 		for (JRadioButton button : buttons) {
 			button.setActionCommand(button.getText());
-			System.out.println("button " + button.getText());
 			group.add(button);
 			qPanel.add(button);
 		}
-		
-//		submit.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e){
-//				String pressed = group.getSelection().getActionCommand();
-//				System.out.println("Button pressed " + pressed);
-//				if (pressed.equals(answer)){	
-//					//To Do: add in player status updates
-//					System.out.println("correct");
-//				}
-//				else {
-//					//To Do: add in player status updates
-//					System.out.println("incorrect");
-//				}
-//				
-//			}
-//		});
-
 
 		submit = new JButton("Submit");
 		submit.setActionCommand("Submit");
 		qPanel.add(submit);
-
-//		submit.addActionListener(new ActionListener() {
-//			//		@Overrride
-//			public void actionPerformed(ActionEvent e){
-//				String pressed = group.getSelection().getActionCommand();
-//				System.out.println("Button pressed " + pressed);
-//				if (pressed.equals(answer)){
-//					System.out.println("correct");
-//					return;
-//				}
-//				else {
-//					System.out.println("incorrect");
-//					return;
-//				}
-//
-//			}
-//		});
 
 		return qPanel;
 	}
@@ -322,30 +286,21 @@ public class GameGUI extends JFrame {
 	 * @param q The list of questions. 
 	 */
 	public void updateQuestion(ArrayList<Question> q, final Player p) {
-		System.out.println("lives " + p.getLivesRemaining());
 		gameGUIQuestions = q;
 		clicked = false;
 		updateQuestionField(pickQuestion(gameGUIQuestions));
-		System.out.println(pickQuestion(gameGUIQuestions).getCorrectAnswer()); //TODO remove this for final presentation
 		submit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
 				String actionCommand = ((JButton) e.getSource()).getActionCommand();
-				System.out.println("Action command for pressed button: " + actionCommand); //TODO remove this for final presentation
 				if (actionCommand.equals("Submit")){
 					String pressed = group.getSelection().getActionCommand();
-					System.out.println("Button pressed " + pressed);
 					if (pressed.equals(answer)){	
-						//TODO: add in player status updates
-						System.out.println("correct" + questionCounter); //TODO remove this for final presentation
 						updateQuestionField(pickQuestion(gameGUIQuestions));
 						correct = true;
 					}
 					else {
-						//To Do: add in player status updates
-						System.out.println("false");
 						p.loseLife();
 						updateStatus(p);
-						System.out.println("lives " + p.getLivesRemaining());
 						updateQuestionField(pickQuestion(gameGUIQuestions));
 						correct = false;
 					}
@@ -367,7 +322,6 @@ public class GameGUI extends JFrame {
 		for (Fraction answer : question.orderAnswers()) {
 			buttons.get(i).setText(question.sequencedAnswers.get(i).toString());
 			buttons.get(i).setActionCommand(buttons.get(i).getText());
-			System.out.println("button " + buttons.get(i).getText());
 			i++;
 		}
 		repaint();

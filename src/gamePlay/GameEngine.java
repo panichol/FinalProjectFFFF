@@ -44,7 +44,6 @@ public class GameEngine {
 	
 	public void loadQuestionFile(String fileName) throws BadFormatException{
 		try{
-			//FileReader reader = new FileReader(fileName);
 			InputStream reader = getClass().getResourceAsStream(fileName);
 			Scanner in = new Scanner(reader);
 			//////////////////
@@ -115,11 +114,6 @@ public class GameEngine {
 					}
 					else{
 						q.sequenceAnswers();
-						System.out.println(q);
-						System.out.println("sequenced " + q.sequencedAnswers.get(0).getNumerator());
-						System.out.println("sequenced " + q.sequencedAnswers.get(1).getNumerator());
-						System.out.println("sequenced " + q.sequencedAnswers.get(2).getNumerator());
-						System.out.println("sequenced " + q.sequencedAnswers.get(3).getNumerator());
 						questions.add(q);
 					}
 				}
@@ -184,7 +178,6 @@ public class GameEngine {
 			//http://stackoverflow.com/questions/9721066/how-to-display-java-timer-on-a-separate-j-frame-form-label
 			if(timeLeft > 0)
 			{
-				//System.out.println("Time left is " + timeLeft);
 				gui.updatePlayerRock(11-timeLeft);
 				timeLeft--;
 				gui.updateTime(timeLeft);
@@ -260,11 +253,9 @@ public class GameEngine {
 				, "Welcome", JOptionPane.INFORMATION_MESSAGE);
 		game.gui.setVisible(true);
 		game.gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		game.gui.updateStatus(game.player);
+		game.gui.updateStatus(game.player);
 		
 		GameEngine.startTimer();
-		game.printQuestions();
-			System.out.println("here");
 			if (game.player.getLivesRemaining() > 0){
 				Question q = game.getQuestion();
 				boolean correct = game.askQuestion();
