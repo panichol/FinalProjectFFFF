@@ -282,7 +282,7 @@ public class GameGUI extends JFrame {
 			answerOutcome.setText("Correct!");
 		}
 		else{
-			answerOutcome.setText("Incorrect!");
+			answerOutcome.setText("Incorrect! Correct answer is " + answer + ".");
 		}
 	}
 
@@ -330,16 +330,17 @@ public class GameGUI extends JFrame {
 			if (pressed.equals(answer)){	
 				//TODO: add in player status updates
 				System.out.println("Correct"); //TODO remove this for final presentation
+				updateAnswerOutcome(correct, answer);
 				updateQuestionField(pickQuestion(gameGUIQuestions));
 				correct = true;
 			}
 			else {
 				player.loseLife();
 				updateStatus();
+				updateAnswerOutcome(correct, answer);
 				updateQuestionField(pickQuestion(gameGUIQuestions));
 				correct = false;
 			}
-			updateAnswerOutcome(correct, answer);
 		}
 	}
 	
