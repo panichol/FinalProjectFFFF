@@ -21,6 +21,7 @@ public class GameEngine {
 	private ArrayList<Question> questions;
 	private Fraction playerAnswer;
 	private static GameGUI gui;
+	public static boolean firstLevel = true;
 	
 	//Timer variables
 	private static Timer timer;		//The timer object. Can pause, start, and stop. Stops when out of time. 
@@ -28,7 +29,7 @@ public class GameEngine {
 	private int startTime;			//The time that the timer will start at when reset.
 	public boolean timeRemaining;	//True for has time, false if out of time.
 
-	public GameEngine(String boardLoc1, String boardLoc2) {
+	public GameEngine(String boardLoc1, String boardLoc2, boolean firstLevel) {
 		player = new Player();
 		questionsLeft = 10;
 		playerAnswer = new Fraction();
@@ -36,7 +37,7 @@ public class GameEngine {
 		timeLeft = startTime;
 		timeRemaining = true;
 		timer = new Timer(1000, new TimerListener());
-		gui = new GameGUI(player, boardLoc1, boardLoc2);
+		gui = new GameGUI(player, boardLoc1, boardLoc2, firstLevel);
 		questions = new ArrayList<Question>();
 		
 		//gui.updatePlayerRock(10);
@@ -249,7 +250,7 @@ public class GameEngine {
 	}
 	
 	public static void main(String args[]) throws BadFormatException {
-		GameEngine game = new GameEngine("/images/BoardWave1.png","/images/BoardWave2.png");
+		GameEngine game = new GameEngine("/images/BoardWave1.png","/images/BoardWave2.png",true);
 		game.loadQuestionFile("/data/input.txt");
 		JOptionPane.showMessageDialog(gui, "Welcome to Fraction Flash Flood - please press OK to continue"
 				, "Welcome", JOptionPane.INFORMATION_MESSAGE);
@@ -266,5 +267,32 @@ public class GameEngine {
 				GameEngine.gui.setVisible(true);
 			}
 			//game = new GameEngine();
+			
+			while (firstLevel) {
+				try {
+					TimeUnit.SECONDS.sleep(1);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			GameEngine.gui.setVisible(false);
+			
+			game = new GameEngine("/images/BoardLava1.png","/images/BoardLava2.png",false);
+			game.loadQuestionFile("/data/input2.txt");
+			game.gui.setVisible(true);
+			game.gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			game.gui.updateStatus();
+			
+			GameEngine.startTimer();
+				if (game.player.getLivesRemaining() > 0){
+					Question q = game.getQuestion();
+					boolean correct = game.askQuestion();
+					
+					//GameEngine.gui.updateQuestionField(game.getQuestion());
+					GameEngine.gui.setVisible(true);
+				}
+				//game = new GameEngine();		
 	}
 }

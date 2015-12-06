@@ -17,7 +17,7 @@ public class FileIOTests {
 
 	@Before
 	public void startup(){
-		control  = new GameEngine();
+		control  = new GameEngine("/images/BoardWave1.png","/images/BoardWave2.png",true);
 	}
 	
 	@Test

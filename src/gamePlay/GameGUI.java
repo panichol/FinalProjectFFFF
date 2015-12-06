@@ -35,6 +35,8 @@ public class GameGUI extends JFrame {
 	private ArrayList<Question> gameGUIQuestions;	//The list of questions.
 	private static Player player;
 	public int rock;
+	protected String winMessage;
+	protected boolean firstLevel = true;
 
 	//Image stuff
 	private Image playerSprite;						//The Player's Sprite. 
@@ -47,12 +49,17 @@ public class GameGUI extends JFrame {
 	 * Default initializer. 
 	 * Sets up all the different fields and places them. 
 	 */
-	public GameGUI(Player p, String boardLoc1, String boardLoc2) {
+	public GameGUI(Player p, String boardLoc1, String boardLoc2, boolean lvl) {
+		firstLevel = lvl;
 		player = p;
 		rock = 0;
 		board0Path = boardLoc1;
 		board1Path = boardLoc2;
 		correct = false;
+		if(firstLevel)
+			winMessage = "Congratulations! You get to go to the Laval!";
+		else
+			winMessage = "Congratulations! You won Fraction Flash Flood!";
 		setSize(600,800);
 		buttons = new ArrayList<JRadioButton>();
 		for (int i=0; i < 4; i++) {
@@ -204,9 +211,12 @@ public class GameGUI extends JFrame {
 			break;
 			case 11: playerX = PADDING + boardWidth * 71/80;
 			playerY = PADDING + boardHeight * 3/8;
-			JOptionPane.showMessageDialog(graphicsPanel,"Congratulations! You won Fraction Flash Flood!"
+			JOptionPane.showMessageDialog(graphicsPanel,winMessage
 					,"Congratulations!",JOptionPane.INFORMATION_MESSAGE);
-			System.exit(0);
+			if (!firstLevel)
+				System.exit(0);
+			else
+				GameEngine.firstLevel = false;
 			break;
 
 			default: playerX = PADDING;

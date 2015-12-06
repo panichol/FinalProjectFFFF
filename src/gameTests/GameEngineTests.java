@@ -40,7 +40,7 @@ public class GameEngineTests {
 		Question q3 = new Question("Is this question 3?",answer, false1, false2, false3);
 
 		questions.add(q3);
-		GameEngine control = new GameEngine();
+		GameEngine control = new GameEngine("/images/BoardWave1.png","/images/BoardWave2.png",true);
 		control.setQuestionsArray(questions);
 		int count1 = 0;
 		int count2 = 0;

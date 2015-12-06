@@ -19,7 +19,7 @@ public class QuestionAnswerTests extends TestCase {
 	
 	@BeforeClass
 	public void setUp() throws BadFormatException {
-		newGame = new GameEngine();
+		newGame = new GameEngine("/images/BoardWave1.png","/images/BoardWave2.png",true);
 	}
 	
 	@Test

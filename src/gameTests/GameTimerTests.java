@@ -14,7 +14,7 @@ import gamePlay.*;
 public class GameTimerTests {
 	@Test
 	public void TimerTest() throws InterruptedException { //Needs the throw for the TimeUnit parts. 
-		GameEngine game = new GameEngine();
+		GameEngine game = new GameEngine("/images/BoardWave1.png","/images/BoardWave2.png",true);
 		//Starting time
 		int time = game.getTime();
 		//Lets timer run for 2 seconds. 
