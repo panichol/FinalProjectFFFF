@@ -265,5 +265,6 @@ public class GameEngine {
 				//GameEngine.gui.updateQuestionField(game.getQuestion());
 				GameEngine.gui.setVisible(true);
 			}
+			//game = new GameEngine();
 	}
 }
