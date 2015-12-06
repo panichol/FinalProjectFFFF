@@ -38,11 +38,14 @@ private int livesRemaining;
 	 */
 	//public boolean loseLife() {
 	public void loseLife() {
-		if(livesRemaining == 1) {
-			livesRemaining = 0;
+		if(livesRemaining == 0) {
+			System.out.println("No lives remain.");
+			return;
 			//return false;
 		}
 		livesRemaining--;
+		System.out.println("lives remaining " + livesRemaining);
 		//return true;
 	}
+	
 }

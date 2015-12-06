@@ -13,44 +13,39 @@ import gamePlay.GameEngine;
 import gamePlay.Question;
 
 public class FileIOTests {
-	
+	GameEngine control;
+
 	@Before
 	public void startup(){
-		
-	}
-
-	@Test
-	public void loadBitMapTest() {		//TODO make a function to test the reading in of the background 
-		fail("Not yet implemented");
+		control  = new GameEngine();
 	}
 	
 	@Test
 	public void loadQuestionsTest(){		//This function tests that the questions were read in from the file correctly
 		try{ 
-			GameEngine control = new GameEngine();
-			control.loadQuestionFile("input.txt");
+			control.loadQuestionFile("/data/input.txt");
 			ArrayList<Question> questions = control.getQuestionsArray();
 			
-			Fraction f1 = new Fraction(5,4);
-			Fraction f2 = new Fraction(3,2);
-			Fraction f3 = new Fraction(4,4);
-			Fraction f4 = new Fraction(10,8);
-			Question q1 = new Question("What is 3/4 + 1/2 equal to?",f1,f2,f3,f4);
-			assertTrue(q1.equals(questions.get(0)));
+			Fraction correctAnswer = questions.get(0).getCorrectAnswer();
+			String question = questions.get(0).getQuestion();
+			assertTrue(question.equals("What is 3/4 + 1/2 equal to?"));
+			assertEquals(correctAnswer.getNumerator(), 5);
+			assertEquals(correctAnswer.getDenominator(), 4);
 			
-			f1 = new Fraction(5,12);
-			f2 = new Fraction(8,12);
-			f3 = new Fraction(1,3);
-			f4 = new Fraction(7,12);
-			Question q5 = new Question("What is 3/4 - 1/3 equal to?",f1,f2,f3,f4);
-			assertTrue(q5.equals(questions.get(4)));
+			Fraction correctAnswerMiddle = questions.get(9).getCorrectAnswer();
+			String questionMiddle = questions.get(9).getQuestion();
+			System.out.println(questionMiddle);
+			assertTrue(questionMiddle.equals("What is 3/2 ï¿½ 4/5 equal to?"));
+			assertEquals(correctAnswerMiddle.getNumerator(), 15);
+			assertEquals(correctAnswerMiddle.getDenominator(), 8);
 			
-			f1 = new Fraction(15,8);
-			f2 = new Fraction(12,10);
-			f3 = new Fraction(6,5);
-			f4 = new Fraction(8,15);
-			Question q10 = new Question("What is 3/2 ÷ 4/5 equal to?",f1,f2,f3,f4);
-			assertTrue(q10.equals(questions.get(9)));
+			Fraction correctAnswerFinal = questions.get(questions.size() - 1).getCorrectAnswer();
+			String questionFinal = questions.get(questions.size() - 1).getQuestion();
+			System.out.println(questionFinal);
+			assertTrue(questionFinal.equals("What is 1/4 ï¿½ 1/5 equal to?"));
+			assertEquals(correctAnswerFinal.getNumerator(), 1);
+			assertEquals(correctAnswerFinal.getDenominator(), 20);
+			
 		}
 		catch (BadFormatException bfe) {
 			fail(bfe.getMessage());
