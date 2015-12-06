@@ -47,5 +47,9 @@ private int livesRemaining;
 		System.out.println("lives remaining " + livesRemaining);
 		//return true;
 	}
+
+	public void loseAllLives() {
+		livesRemaining = 0;
+	}
 	
 }
