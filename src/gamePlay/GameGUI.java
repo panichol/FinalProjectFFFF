@@ -25,6 +25,7 @@ public class GameGUI extends JFrame {
 	private JTextField timeDisp;					//The area that displays the time left. 
 	private JTextField questionDisp;				//The actual individual question area. 
 	private JTextField livesDisp;					//The lives display area. 
+	private JTextField answerOutcome;
 	private ArrayList<JRadioButton> buttons;		//The buttons of the answers.
 	private ButtonGroup group;						//The button group that will hold the answer buttons. 
 	private JButton submit;							//The submit button
@@ -33,6 +34,7 @@ public class GameGUI extends JFrame {
 	private boolean clicked;						//The boolean that tells if the submit button has been clicked.
 	private ArrayList<Question> gameGUIQuestions;	//The list of questions.
 	private static Player player;
+	public int rock;
 
 	//Image stuff
 	private Image playerSprite;						//The Player's Sprite. 
@@ -44,6 +46,7 @@ public class GameGUI extends JFrame {
 	 */
 	public GameGUI(Player p) {
 		player = p;
+		rock = 0;
 		correct = false;
 		setSize(600,800);
 		buttons = new ArrayList<JRadioButton>();
@@ -62,6 +65,10 @@ public class GameGUI extends JFrame {
 		livesDisp = new JTextField(5);
 		livesDisp.setEnabled(false);
 		livesDisp.setDisabledTextColor(Color.BLACK);
+		
+		answerOutcome = new JTextField(5);
+		answerOutcome.setEnabled(false);
+		answerOutcome.setDisabledTextColor(Color.BLACK);
 
 		setLayout(new GridLayout(0,1));
 		graphicsPanel = new ImagePanel();
@@ -184,6 +191,7 @@ public class GameGUI extends JFrame {
 			playerY = PADDING + boardHeight * 3/8;
 			JOptionPane.showMessageDialog(graphicsPanel,"Congratulations! You won Fraction Flash Flood!"
 					,"Congratulations!",JOptionPane.INFORMATION_MESSAGE);
+			System.exit(0);
 			break;
 
 			default: playerX = PADDING;
@@ -251,11 +259,14 @@ public class GameGUI extends JFrame {
 		TitledBorder statusBorder = new TitledBorder("Player Status");
 		JLabel timeLabel = new JLabel("Time Remaining");
 		JLabel livesLabel = new JLabel("Lives Remaining");
+		JLabel correct = new JLabel("Answer Outcome");
 		sPanel.setBorder(statusBorder);
 		sPanel.add(timeLabel);
 		sPanel.add(timeDisp);
 		sPanel.add(livesLabel);
 		sPanel.add(livesDisp);
+		sPanel.add(correct);
+		sPanel.add(answerOutcome);
 
 		return sPanel;
 	}
@@ -268,6 +279,14 @@ public class GameGUI extends JFrame {
 	public void updateTime(int time) {
 		timeDisp.setText(Integer.toString(time));		
 		repaint();
+	}
+	public void updateAnswerOutcome(boolean correct, String answer){
+		if (correct){
+			answerOutcome.setText("Correct!");
+		}
+		else{
+			answerOutcome.setText("Incorrect! Correct answer is " + answer + ".");
+		}
 	}
 
 	/**
@@ -309,20 +328,28 @@ public class GameGUI extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			//System.out.println("THIS IS HAPPENEING");
+			if (group.getSelection() == null){
+				return;
+			}
 			String pressed = group.getSelection().getActionCommand();
 			System.out.println("Button pressed " + pressed);
 			if (pressed.equals(answer)){	
 				//TODO: add in player status updates
 				System.out.println("Correct"); //TODO remove this for final presentation
+				updateAnswerOutcome(correct, answer);
 				updateQuestionField(pickQuestion(gameGUIQuestions));
 				correct = true;
+				rock++;
+				//System.out.println(rock);
+				updatePlayerRock(rock);
 			}
 			else {
 				player.loseLife();
-				updateStatus();
+				updateAnswerOutcome(correct, answer);
 				updateQuestionField(pickQuestion(gameGUIQuestions));
 				correct = false;
 			}
+			updateStatus();
 		}
 	}
 	
@@ -352,7 +379,7 @@ public class GameGUI extends JFrame {
 	 */
 	public void updateStatus() {
 		livesDisp.setText(Integer.toString(player.getLivesRemaining()));
-		if (player.getLivesRemaining() <= 0) {
+		if (player.getLivesRemaining() == 0) {
 			JOptionPane.showMessageDialog(getParent(), "Sorry, you have run out of lives!"
 					, "Game Over", JOptionPane.INFORMATION_MESSAGE);
 			System.exit(0);

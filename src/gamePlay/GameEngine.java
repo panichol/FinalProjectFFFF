@@ -181,7 +181,6 @@ public class GameEngine {
 	 */
 	public class TimerListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			//http://stackoverflow.com/questions/9721066/how-to-display-java-timer-on-a-separate-j-frame-form-label
 			if(timeLeft > 0)
 			{
 				timeLeft--;
@@ -191,10 +190,9 @@ public class GameEngine {
 			}
 			else {
 				//TODO what happens when the time is up here.
-				player.loseLife();
+				player.loseAllLives();
 				gui.updateStatus();
-				gui.updatePlayerRock(11);
-				resetTimer();
+				//resetTimer();
 			}
 		}
 	}
