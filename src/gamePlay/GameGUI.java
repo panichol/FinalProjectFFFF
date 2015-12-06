@@ -25,6 +25,7 @@ public class GameGUI extends JFrame {
 	private JTextField timeDisp;					//The area that displays the time left. 
 	private JTextField questionDisp;				//The actual individual question area. 
 	private JTextField livesDisp;					//The lives display area. 
+	private JTextField answerOutcome;
 	private ArrayList<JRadioButton> buttons;		//The buttons of the answers.
 	private ButtonGroup group;						//The button group that will hold the answer buttons. 
 	private JButton submit;							//The submit button
@@ -62,6 +63,10 @@ public class GameGUI extends JFrame {
 		livesDisp = new JTextField(5);
 		livesDisp.setEnabled(false);
 		livesDisp.setDisabledTextColor(Color.BLACK);
+		
+		answerOutcome = new JTextField(5);
+		answerOutcome.setEnabled(false);
+		answerOutcome.setDisabledTextColor(Color.BLACK);
 
 		setLayout(new GridLayout(0,1));
 		graphicsPanel = new ImagePanel();
@@ -251,11 +256,14 @@ public class GameGUI extends JFrame {
 		TitledBorder statusBorder = new TitledBorder("Player Status");
 		JLabel timeLabel = new JLabel("Time Remaining");
 		JLabel livesLabel = new JLabel("Lives Remaining");
+		JLabel correct = new JLabel("Answer Outcome");
 		sPanel.setBorder(statusBorder);
 		sPanel.add(timeLabel);
 		sPanel.add(timeDisp);
 		sPanel.add(livesLabel);
 		sPanel.add(livesDisp);
+		sPanel.add(correct);
+		sPanel.add(answerOutcome);
 
 		return sPanel;
 	}
@@ -268,6 +276,14 @@ public class GameGUI extends JFrame {
 	public void updateTime(int time) {
 		timeDisp.setText(Integer.toString(time));		
 		repaint();
+	}
+	public void updateAnswerOutcome(boolean correct, String answer){
+		if (correct){
+			answerOutcome.setText("Correct!");
+		}
+		else{
+			answerOutcome.setText("Incorrect!");
+		}
 	}
 
 	/**
@@ -323,6 +339,7 @@ public class GameGUI extends JFrame {
 				updateQuestionField(pickQuestion(gameGUIQuestions));
 				correct = false;
 			}
+			updateAnswerOutcome(correct, answer);
 		}
 	}
 	
