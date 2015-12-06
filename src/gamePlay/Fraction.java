@@ -30,9 +30,6 @@ public class Fraction {
 	public void setDenominator(int denominator){
 		this.denominator = denominator;
 	}
-	public void reduce(){
-		
-	}	
 	public boolean equals(Fraction other){
 		return numerator == other.numerator && denominator == other.denominator;
 	}

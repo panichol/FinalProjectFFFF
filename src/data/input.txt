@@ -1,65 +1,65 @@
 ﻿20
-What is 3/4 + 1/2 equal to?
+What is 3/4 plus 1/2 equal to?
 5/4
 3/2
 4/4
 10/8
-What is 3/5 - 1/2 equal to?
-1/5
+What is 3/5 minus 1/2 equal to?
+1/10
 4/5
 2/5
 3/5
-What is 3/4 * 1/2 equal to?
+What is 3/4 times 1/2 equal to?
 3/8
 1/2
 2/3
 6/4
-What is 3/4 ~ 1/2 equal to?
+What is 3/4 divided by 1/2 equal to?
 3/2
 6/4
 2/8
 4/3
-What is 3/4 - 1/3 equal to?
+What is 3/4 minus 1/3 equal to?
 5/12
 8/12
 1/3
 7/12
-What is 1/4 * 1/2 equal to?
+What is 1/4 times 1/2 equal to?
 1/8
 1/2
 2/3
 6/4
-What is 3/5 ~ 1/2 equal to?
+What is 3/5 divided by 1/2 equal to?
 6/5
 5/6
 3/10
 6/4
-What is 3/4 * 1/3 equal to?
+What is 3/4 times 1/3 equal to?
 1/4
 4/9
 3/12
 3/12
-What is 1/4 ~ 1/8 equal to?
+What is 1/4 divided by 1/8 equal to?
 2/1
 1/2
 8/4
 1/32
-What is 3/2 ~ 4/5 equal to?
+What is 3/2 divided by 4/5 equal to?
 15/8
 12/10
 6/5
 8/15
-What is 1/5 + 2/5 equal to?
+What is 1/5 plus 2/5 equal to?
 3/5
 3/10
 2/25
 3/25
-What is 3/5 * 1/2 equal to?
+What is 3/5 times 1/2 equal to?
 3/10
 4/7
 6/5
 1/10
-What is 3/4 - 1/2 equal to?
+What is 3/4 minus 1/2 equal to?
 1/4
 1/2
 5/4
@@ -79,22 +79,22 @@ What does 3/9 reduce to?
 1/4
 2/3
 3/9
-What is 5/4 - 1/4 equal to?
+What is 5/4 minus 1/4 equal to?
 1/1
 4/0
 6/8
 5/16
-What is 2/3 * 2/3 equal to?
+What is 2/3 times 2/3 equal to?
 4/9
 4/6
 1/1
 4/5
-What is 3/5 ~ 1/3 equal to?
+What is 3/5 divided by 1/3 equal to?
 9/5
 3/15
 2/3
 4/10
-What is 1/4 ~ 1/5 equal to?
+What is 1/4 divided by 1/5 equal to?
 1/20
 1/10
 1/9
