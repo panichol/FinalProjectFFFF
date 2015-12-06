@@ -13,21 +13,16 @@ import gamePlay.GameEngine;
 import gamePlay.Question;
 
 public class FileIOTests {
-	
+	GameEngine control;
+
 	@Before
 	public void startup(){
-		
+		control  = new GameEngine();
 	}
-
-//	@Test
-//	public void loadBitMapTest() {		//TODO make a function to test the reading in of the background 
-//		fail("Not yet implemented");
-//	}
 	
 	@Test
 	public void loadQuestionsTest(){		//This function tests that the questions were read in from the file correctly
 		try{ 
-			GameEngine control = new GameEngine();
 			control.loadQuestionFile("/data/input.txt");
 			ArrayList<Question> questions = control.getQuestionsArray();
 			

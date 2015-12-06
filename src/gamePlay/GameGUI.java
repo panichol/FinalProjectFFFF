@@ -321,7 +321,8 @@ public class GameGUI extends JFrame {
 	 * 
 	 * @param q The list of questions. 
 	 */
-	public void updateQuestion(ArrayList<Question> q) {
+	public void updateQuestion(ArrayList<Question> q, final Player p) {
+		System.out.println("lives " + p.getLivesRemaining());
 		gameGUIQuestions = q;
 		clicked = false;
 		updateQuestionField(pickQuestion(gameGUIQuestions));
@@ -330,7 +331,6 @@ public class GameGUI extends JFrame {
 			public void actionPerformed(ActionEvent e){
 				String actionCommand = ((JButton) e.getSource()).getActionCommand();
 				System.out.println("Action command for pressed button: " + actionCommand); //TODO remove this for final presentation
-//				clicked = true;
 				if (actionCommand.equals("Submit")){
 					String pressed = group.getSelection().getActionCommand();
 					System.out.println("Button pressed " + pressed);
@@ -342,6 +342,10 @@ public class GameGUI extends JFrame {
 					}
 					else {
 						//To Do: add in player status updates
+						System.out.println("false");
+						p.loseLife();
+						updateStatus(p);
+						System.out.println("lives " + p.getLivesRemaining());
 						updateQuestionField(pickQuestion(gameGUIQuestions));
 						correct = false;
 					}

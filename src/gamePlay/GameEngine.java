@@ -32,7 +32,7 @@ public class GameEngine {
 		player = new Player();
 		questionsLeft = 10;
 		playerAnswer = new Fraction();
-		startTime = 10;
+		startTime = 180;
 		timeLeft = startTime;
 		timeRemaining = true;
 		timer = new Timer(1000, new TimerListener());
@@ -52,11 +52,6 @@ public class GameEngine {
 			//////////////////
 			int numQuestions = 20;
 			in.nextLine();
-//			Question q = new Question();
-//			Fraction f1 = new Fraction();
-//			Fraction f2 = new Fraction();
-//			Fraction f3 = new Fraction();
-//			Fraction f4 = new Fraction();
 			
 			int a1;
 			int a2;
@@ -148,7 +143,7 @@ public class GameEngine {
 //	}
 	
 	public boolean askQuestion(){//asks the player a question , and returns whether or not they got it right
-		GameEngine.gui.updateQuestion(getQuestionsArray());
+		GameEngine.gui.updateQuestion(getQuestionsArray(), player);
 		return false;//return whether or not the player got the question right
 	}
 
@@ -265,7 +260,7 @@ public class GameEngine {
 				, "Welcome", JOptionPane.INFORMATION_MESSAGE);
 		game.gui.setVisible(true);
 		game.gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		game.gui.updateStatus(game.player);
+//		game.gui.updateStatus(game.player);
 		
 		GameEngine.startTimer();
 		game.printQuestions();
