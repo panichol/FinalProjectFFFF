@@ -32,7 +32,7 @@ public class GameEngine {
 		player = new Player();
 		questionsLeft = 10;
 		playerAnswer = new Fraction();
-		startTime = 10;
+		startTime = 180;
 		timeLeft = startTime;
 		timeRemaining = true;
 		timer = new Timer(1000, new TimerListener());
@@ -121,7 +121,7 @@ public class GameEngine {
 					else{
 						q.sequenceAnswers();
 						System.out.println(q);
-						System.out.println("sequenced " + q.sequencedAnswers.get(0).getNumerator());
+						System.out.println("sequenced " + q.sequencedAnswers.get(0).getNumerator());//TODO remove this for final presentation
 						System.out.println("sequenced " + q.sequencedAnswers.get(1).getNumerator());
 						System.out.println("sequenced " + q.sequencedAnswers.get(2).getNumerator());
 						System.out.println("sequenced " + q.sequencedAnswers.get(3).getNumerator());
@@ -143,9 +143,9 @@ public class GameEngine {
 		return playerAnswer;
 	}
 
-//	public boolean askQuestion(){//asks the player a question , and returns whether or not they got it right
-//		return GameEngine.gui.updateQuestion(getQuestion());//return whether or not the player got the question right
-//	}
+/*	public boolean askQuestion(){//asks the player a question , and returns whether or not they got it right
+		return GameEngine.gui.updateQuestion(getQuestion());//return whether or not the player got the question right
+	}*/
 	
 	public boolean askQuestion(){//asks the player a question , and returns whether or not they got it right
 		GameEngine.gui.updateQuestion(getQuestionsArray());
@@ -190,7 +190,6 @@ public class GameEngine {
 			if(timeLeft > 0)
 			{
 				//System.out.println("Time left is " + timeLeft);
-				gui.updatePlayerRock(11-timeLeft);
 				timeLeft--;
 				gui.updateTime(timeLeft);
 				

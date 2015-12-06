@@ -30,18 +30,17 @@ public class GameGUI extends JFrame {
 	private boolean correct;						//The boolean that tells if the player has submitted a correct answer. 
 	private boolean clicked;						//The boolean that tells if the submit button has been clicked.
 	private ArrayList<Question> gameGUIQuestions;	//The list of questions.
-	private int questionCounter; 					//counter used between loops in submit function
+
 	//Image stuff
 	private Image playerSprite;						//The Player's Sprite. 
 	private Image background;						//The background image.
-	
+
 	/**
 	 * Default initializer. 
 	 * Sets up all the different fields and places them. 
 	 */
 	public GameGUI() {
 		correct = false;
-		questionCounter = 0;
 		setSize(600,800);
 		buttons = new ArrayList<JRadioButton>();
 		for (int i=0; i < 4; i++) {
@@ -73,7 +72,7 @@ public class GameGUI extends JFrame {
 		bottom.add(questionPanel);
 		add(bottom);
 	}
-	
+
 	public class ImagePanel extends JPanel{
 		private int playerX;
 		private int playerY;
@@ -84,17 +83,17 @@ public class GameGUI extends JFrame {
 		private int playerWidth;
 		private int playerHeight;
 		private boolean startingLevel;
-		
+
 		/**
 		 * Default constructor. 
 		 * Places the images on the screen. 
 		 */
 		public ImagePanel() {
-			 playerX = 90;
-			 playerY = 90;
-			 startingLevel = true;
-			 //System.out.println("THIS IS PLAYER LOCATION: " + playerX + ", " + playerY);
-			
+			playerX = 90;
+			playerY = 90;
+			startingLevel = true;
+			//System.out.println("THIS IS PLAYER LOCATION: " + playerX + ", " + playerY);
+
 			tracker = new MediaTracker(this);
 			playerSprite = getImage("/images/player1.png",1);
 			background = getImage("/images/board0.png",0);
@@ -102,7 +101,7 @@ public class GameGUI extends JFrame {
 			background = background.getScaledInstance(160, 100, Image.SCALE_FAST);
 			playerSprite = playerSprite.getScaledInstance(11, 17,  Image.SCALE_FAST);
 		}
-		
+
 		/**
 		 * Paints the actual components. If there is a graphical derp it probably happened in here. 
 		 * This is called when repaint is called.
@@ -114,12 +113,12 @@ public class GameGUI extends JFrame {
 			boardHeight = this.getHeight()-2*PADDING;
 			playerWidth = boardWidth*11/160;
 			playerHeight = boardHeight*17/100;
-			
+
 			if(startingLevel){
 				updateCurrentRock(0);
 				startingLevel = !startingLevel;
 			}
-			
+
 			g.drawImage(background, PADDING, PADDING, boardWidth, boardHeight, null);
 			//System.out.println("THIS IS ALSO LOCATION: " + playerX + ", " + playerY);
 			g.drawImage(playerSprite, playerX, playerY, playerWidth, playerHeight, null);
@@ -180,6 +179,8 @@ public class GameGUI extends JFrame {
 			break;
 			case 11: playerX = PADDING + boardWidth * 71/80;
 			playerY = PADDING + boardHeight * 3/8;
+			JOptionPane.showMessageDialog(graphicsPanel,"Congratulations! You won Fraction Flash Flood!"
+					,"Congratulations!",JOptionPane.INFORMATION_MESSAGE);
 			break;
 
 			default: playerX = PADDING;
@@ -206,7 +207,7 @@ public class GameGUI extends JFrame {
 			return image;
 		}
 	}
-	
+
 	/**
 	 * Sets up the panel for the question.
 	 * 
@@ -219,7 +220,7 @@ public class GameGUI extends JFrame {
 		qPanel.setBorder(questionBorder);
 
 		group = new ButtonGroup();
-		
+
 		qPanel.add(questionDisp);
 
 		for (JRadioButton button : buttons) {
@@ -228,48 +229,48 @@ public class GameGUI extends JFrame {
 			group.add(button);
 			qPanel.add(button);
 		}
-		
-//		submit.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e){
-//				String pressed = group.getSelection().getActionCommand();
-//				System.out.println("Button pressed " + pressed);
-//				if (pressed.equals(answer)){	
-//					//To Do: add in player status updates
-//					System.out.println("correct");
-//				}
-//				else {
-//					//To Do: add in player status updates
-//					System.out.println("incorrect");
-//				}
-//				
-//			}
-//		});
+
+		/*		submit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e){
+				String pressed = group.getSelection().getActionCommand();
+				System.out.println("Button pressed " + pressed);
+				if (pressed.equals(answer)){	
+					//To Do: add in player status updates
+					System.out.println("correct");
+				}
+				else {
+					//To Do: add in player status updates
+					System.out.println("incorrect");
+				}
+
+			}
+		});*/
 
 
 		submit = new JButton("Submit");
 		submit.setActionCommand("Submit");
 		qPanel.add(submit);
 
-//		submit.addActionListener(new ActionListener() {
-//			//		@Overrride
-//			public void actionPerformed(ActionEvent e){
-//				String pressed = group.getSelection().getActionCommand();
-//				System.out.println("Button pressed " + pressed);
-//				if (pressed.equals(answer)){
-//					System.out.println("correct");
-//					return;
-//				}
-//				else {
-//					System.out.println("incorrect");
-//					return;
-//				}
-//
-//			}
-//		});
+		/*		submit.addActionListener(new ActionListener() {
+			//		@Overrride
+			public void actionPerformed(ActionEvent e){
+				String pressed = group.getSelection().getActionCommand();
+				System.out.println("Button pressed " + pressed);
+				if (pressed.equals(answer)){
+					System.out.println("correct");
+					return;
+				}
+				else {
+					System.out.println("incorrect");
+					return;
+				}
+
+			}
+		});*/
 
 		return qPanel;
 	}
-	
+
 	/**
 	 * Creates the panel that displays player status. 
 	 * 
@@ -290,7 +291,7 @@ public class GameGUI extends JFrame {
 
 		return sPanel;
 	}
-	
+
 	/**
 	 * Given a time, this will update the time field on the player panel. 
 	 * 
@@ -300,7 +301,7 @@ public class GameGUI extends JFrame {
 		timeDisp.setText(Integer.toString(time));		
 		repaint();
 	}
-	
+
 	/**
 	 * Updates the current question from the list of questions. 
 	 * 
@@ -315,7 +316,7 @@ public class GameGUI extends JFrame {
 		}
 		return questionReturned;
 	}
-	
+
 	/**
 	 * Adds the functionality for the question button. 
 	 * 
@@ -324,30 +325,32 @@ public class GameGUI extends JFrame {
 	public void updateQuestion(ArrayList<Question> q) {
 		gameGUIQuestions = q;
 		clicked = false;
-		updateQuestionField(pickQuestion(gameGUIQuestions));
-		System.out.println(pickQuestion(gameGUIQuestions).getCorrectAnswer()); //TODO remove this for final presentation
-		submit.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e){
-				String actionCommand = ((JButton) e.getSource()).getActionCommand();
-				System.out.println("Action command for pressed button: " + actionCommand); //TODO remove this for final presentation
-//				clicked = true;
-				if (actionCommand.equals("Submit")){
-					String pressed = group.getSelection().getActionCommand();
-					System.out.println("Button pressed " + pressed);
-					if (pressed.equals(answer)){	
-						//TODO: add in player status updates
-						System.out.println("correct" + questionCounter); //TODO remove this for final presentation
-						updateQuestionField(pickQuestion(gameGUIQuestions));
-						correct = true;
-					}
-					else {
-						//To Do: add in player status updates
-						updateQuestionField(pickQuestion(gameGUIQuestions));
-						correct = false;
-					}
-				}
+		Question currentQuestion = pickQuestion(gameGUIQuestions);
+		updateQuestionField(currentQuestion);
+		System.out.println("Correct answer: " + currentQuestion.getCorrectAnswer()); //TODO remove this for final presentation
+		submit.addActionListener(new questionListener());
+	}
+	
+	/**
+	 * The action listener for the Submit button. 
+	 */
+	private class questionListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			String pressed = group.getSelection().getActionCommand();
+			System.out.println("Button pressed " + pressed);
+			if (pressed.equals(answer)){	
+				//TODO: add in player status updates
+				System.out.println("Correct"); //TODO remove this for final presentation
+				updateQuestionField(pickQuestion(gameGUIQuestions));
+				correct = true;
 			}
-		});
+			else {
+				//TODO: add in player status updates
+				updateQuestionField(pickQuestion(gameGUIQuestions));
+				correct = false;
+			}
+		}
 	}
 	
 	/**
@@ -363,12 +366,12 @@ public class GameGUI extends JFrame {
 		for (Fraction answer : question.orderAnswers()) {
 			buttons.get(i).setText(question.sequencedAnswers.get(i).toString());
 			buttons.get(i).setActionCommand(buttons.get(i).getText());
-			System.out.println("button " + buttons.get(i).getText());
+			System.out.println("button " + buttons.get(i).getText());//TODO remove for final project
 			i++;
 		}
 		repaint();
 	}
-	
+
 	/**
 	 * Update Lives and Location, or end game if Player has run out of lives. 
 	 * 
@@ -395,7 +398,7 @@ public class GameGUI extends JFrame {
 	public void updatePlayerRock(int rockNumber) {
 		graphicsPanel.updateCurrentRock(rockNumber);
 	}
-	
+
 	/**
 	 * Used to start the player off in the initial location when reloading for a new level
 	 */
