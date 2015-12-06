@@ -22,6 +22,7 @@ public class GameEngineTests {
 		Fraction false2 = new Fraction(3, 4);
 		Fraction false3 = new Fraction(3, 4);
 		Question q1 = new Question("Is this question 1?",answer, false1, false2, false3);
+		
 		questions.add(q1);
 		answer = new Fraction(1, 3);
 		false1 = new Fraction(3, 4);
