@@ -20,9 +20,9 @@ public class GameEngine {
 	private Fraction playerFraction;
 	private ArrayList<Question> questions;
 	private Fraction playerAnswer;
-	private static GameGUI gui;
+	private GameGUI gui;
 	public static boolean firstLevel = true;
-	
+
 	//Timer variables
 	private static Timer timer;		//The timer object. Can pause, start, and stop. Stops when out of time. 
 	private int timeLeft;			//The time left for the question.
@@ -39,10 +39,10 @@ public class GameEngine {
 		timer = new Timer(1000, new TimerListener());
 		gui = new GameGUI(player, boardLoc1, boardLoc2, firstLevel);
 		questions = new ArrayList<Question>();
-		
+
 		//gui.updatePlayerRock(10);
 	}
-	
+
 	public void loadQuestionFile(String fileName) throws BadFormatException{
 		try{
 			InputStream reader = getClass().getResourceAsStream(fileName);
@@ -50,7 +50,7 @@ public class GameEngine {
 
 			int numQuestions = 20;
 			in.nextLine();
-			
+
 			int a1;
 			int a2;
 			int countLines = 0;
@@ -64,14 +64,14 @@ public class GameEngine {
 					countLines = 0;
 					String a = in.nextLine();
 					String[] divisionTest = a.split("~");	//Reading in a "�" is difficult, so we replace all � with ~ in the file, 
-															//and fix it with this if statement
+					//and fix it with this if statement
 					if (divisionTest.length == 1)
 						q.setQuestion(a);
 					else if (divisionTest.length == 2){
 						q.setQuestion(divisionTest[0] + "�" + divisionTest[1]);
 					}
 					countLines++;
-							
+
 					a = in.nextLine();
 					String[] input = a.split("/");
 					countLines++;
@@ -107,7 +107,7 @@ public class GameEngine {
 					f4.setNumerator(a1);
 					f4.setDenominator(a2);
 					q.setFalseAnswer3(f4);
-					
+
 					if (countLines != 5){
 						throw new BadFormatException("Incorrect number of lines in question. was " +countLines + " should be 5");
 					}
@@ -123,7 +123,7 @@ public class GameEngine {
 			throw ex;
 		}
 		catch (Exception fnfe) {
-				System.out.println("File not found.");
+			System.out.println("File not found.");
 		}
 	}
 
@@ -137,12 +137,12 @@ public class GameEngine {
 		return playerAnswer;
 	}
 
-/*	public boolean askQuestion(){//asks the player a question , and returns whether or not they got it right
+	/*	public boolean askQuestion(){//asks the player a question , and returns whether or not they got it right
 		return GameEngine.gui.updateQuestion(getQuestion());//return whether or not the player got the question right
 	}*/
-	
+
 	public boolean askQuestion(){//asks the player a question , and returns whether or not they got it right
-		GameEngine.gui.updateQuestion(getQuestionsArray());
+		gui.updateQuestion(getQuestionsArray());
 		return false;//return whether or not the player got the question right
 	}
 
@@ -153,7 +153,7 @@ public class GameEngine {
 	public Player getPlayer() {
 		return player;
 	}
-	
+
 	public ArrayList<Question> getQuestionsArray(){
 		return questions;
 	}
@@ -187,7 +187,7 @@ public class GameEngine {
 				gui.repaint();
 			}
 			else {
-				
+
 				player.loseAllLives();
 				gui.updateStatus();
 				//resetTimer();
@@ -246,50 +246,52 @@ public class GameEngine {
 	public int getStartTime() {
 		return startTime;
 	}
-	
+
 	public static void main(String args[]) throws BadFormatException {
 		GameEngine game = new GameEngine("/images/BoardWave1.png","/images/BoardWave2.png",true);
 		game.loadQuestionFile("/data/input.txt");
-		JOptionPane.showMessageDialog(gui, "Welcome to Fraction Flash Flood - please press OK to continue"
+		JOptionPane.showMessageDialog(game.gui, "Welcome to Fraction Flash Flood - please press OK to continue"
 				, "Welcome", JOptionPane.INFORMATION_MESSAGE);
 		game.gui.setVisible(true);
 		game.gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		game.gui.updateStatus();
-		
+
 		GameEngine.startTimer();
-			if (game.player.getLivesRemaining() > 0){
-				Question q = game.getQuestion();
-				boolean correct = game.askQuestion();
-				
-				//GameEngine.gui.updateQuestionField(game.getQuestion());
-				GameEngine.gui.setVisible(true);
-			}
-			//game = new GameEngine();
-			
-			while (firstLevel) {
-				try {
-					TimeUnit.SECONDS.sleep(1);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
-			
-			GameEngine.gui.setVisible(false);
-			
-			game = new GameEngine("/images/BoardLava1.png","/images/BoardLava2.png",false);
-			game.loadQuestionFile("/data/input2.txt");
+		if (game.player.getLivesRemaining() > 0){
+			Question q = game.getQuestion();
+			boolean correct = game.askQuestion();
+
+			//GameEngine.gui.updateQuestionField(game.getQuestion());
 			game.gui.setVisible(true);
-			game.gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			game.gui.updateStatus();
-			
-			GameEngine.startTimer();
-				if (game.player.getLivesRemaining() > 0){
-					Question q = game.getQuestion();
-					boolean correct = game.askQuestion();
-					
-					//GameEngine.gui.updateQuestionField(game.getQuestion());
-					GameEngine.gui.setVisible(true);
-				}
-				//game = new GameEngine();		
+		}
+		//game = new GameEngine();
+
+		while (firstLevel) {
+			try {
+				TimeUnit.SECONDS.sleep(1);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+
+		game.gui.setVisible(false);
+		game = null;
+		System.gc();
+
+		game = new GameEngine("/images/BoardLava1.png","/images/BoardLava2.png",false);
+		game.loadQuestionFile("/data/input2.txt");
+		game.gui.setVisible(true);
+		//game.gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		game.gui.updateStatus();
+
+		GameEngine.startTimer();
+		if (game.player.getLivesRemaining() > 0){
+			Question q = game.getQuestion();
+			boolean correct = game.askQuestion();
+
+			//GameEngine.gui.updateQuestionField(game.getQuestion());
+			game.gui.setVisible(true);
+		}
+		//game = new GameEngine();		
 	}
 }
