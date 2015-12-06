@@ -39,6 +39,7 @@ public class GameGUI extends JFrame {
 	//Image stuff
 	private Image playerSprite;						//The Player's Sprite. 
 	private Image background;						//The background image.
+	private Image waves;							//The waves
 
 	/**
 	 * Default initializer. 
@@ -108,6 +109,7 @@ public class GameGUI extends JFrame {
 			tracker = new MediaTracker(this);
 			playerSprite = getImage("/images/player1.png",1);
 			background = getImage("/images/board0.png",0);
+			waves = getImage("/images/wave.png", 2);
 
 			background = background.getScaledInstance(160, 100, Image.SCALE_FAST);
 			playerSprite = playerSprite.getScaledInstance(11, 17,  Image.SCALE_FAST);
