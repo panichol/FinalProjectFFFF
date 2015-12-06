@@ -40,14 +40,18 @@ public class GameGUI extends JFrame {
 	private Image playerSprite;						//The Player's Sprite. 
 	private Image background1;						//The background image.
 	private Image background0;						//The background image.
+	private String board0Path;
+	private String board1Path;
 
 	/**
 	 * Default initializer. 
 	 * Sets up all the different fields and places them. 
 	 */
-	public GameGUI(Player p) {
+	public GameGUI(Player p, String boardLoc1, String boardLoc2) {
 		player = p;
 		rock = 0;
+		board0Path = boardLoc1;
+		board1Path = boardLoc2;
 		correct = false;
 		setSize(600,800);
 		buttons = new ArrayList<JRadioButton>();
@@ -108,8 +112,8 @@ public class GameGUI extends JFrame {
 			//System.out.println("THIS IS PLAYER LOCATION: " + playerX + ", " + playerY);
 
 			tracker = new MediaTracker(this);
-			background0 = getImage("/images/BoardWave1.png",0);
-			background1 = getImage("/images/BoardWave2.png",0);
+			background0 = getImage(board0Path,0);
+			background1 = getImage(board1Path,0);
 			playerSprite = getImage("/images/player1.png",1);
 
 			//background0 = background0.getScaledInstance(160, 100, Image.SCALE_FAST);

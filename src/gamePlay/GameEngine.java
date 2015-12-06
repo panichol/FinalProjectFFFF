@@ -28,7 +28,7 @@ public class GameEngine {
 	private int startTime;			//The time that the timer will start at when reset.
 	public boolean timeRemaining;	//True for has time, false if out of time.
 
-	public GameEngine() {
+	public GameEngine(String boardLoc1, String boardLoc2) {
 		player = new Player();
 		questionsLeft = 10;
 		playerAnswer = new Fraction();
@@ -36,7 +36,7 @@ public class GameEngine {
 		timeLeft = startTime;
 		timeRemaining = true;
 		timer = new Timer(1000, new TimerListener());
-		gui = new GameGUI(player);
+		gui = new GameGUI(player, boardLoc1, boardLoc2);
 		questions = new ArrayList<Question>();
 		
 		//gui.updatePlayerRock(10);
@@ -249,7 +249,7 @@ public class GameEngine {
 	}
 	
 	public static void main(String args[]) throws BadFormatException {
-		GameEngine game = new GameEngine();
+		GameEngine game = new GameEngine("/images/BoardWave1.png","/images/BoardWave2.png");
 		game.loadQuestionFile("/data/input.txt");
 		JOptionPane.showMessageDialog(gui, "Welcome to Fraction Flash Flood - please press OK to continue"
 				, "Welcome", JOptionPane.INFORMATION_MESSAGE);
