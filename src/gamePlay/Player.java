@@ -49,7 +49,7 @@ private int livesRemaining;
 	}
 
 	public void loseAllLives() {
-		livesRemaining = 0;
+		livesRemaining = -1;
 	}
 	
 }

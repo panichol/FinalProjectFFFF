@@ -33,7 +33,7 @@ public class GameEngine {
 		player = new Player();
 		questionsLeft = 10;
 		playerAnswer = new Fraction();
-		startTime = 180;
+		startTime = 180;//TODO set back to 180
 		timeLeft = startTime;
 		timeRemaining = true;
 		timer = new Timer(1000, new TimerListener());
@@ -63,7 +63,7 @@ public class GameEngine {
 				if (in.hasNextLine()){				
 					countLines = 0;
 					String a = in.nextLine();
-					String[] divisionTest = a.split("~");	//Reading in a "�" is difficult, so we replace all � with ~ in the file, 
+					String[] divisionTest = a.split("~");//no longer necessary
 					//and fix it with this if statement
 					if (divisionTest.length == 1)
 						q.setQuestion(a);

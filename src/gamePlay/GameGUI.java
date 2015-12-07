@@ -77,7 +77,7 @@ public class GameGUI extends JFrame {
 		livesDisp = new JTextField(5);
 		livesDisp.setEnabled(false);
 		livesDisp.setDisabledTextColor(Color.BLACK);
-		
+
 		answerOutcome = new JTextField(5);
 		answerOutcome.setEnabled(false);
 		answerOutcome.setDisabledTextColor(Color.BLACK);
@@ -139,7 +139,7 @@ public class GameGUI extends JFrame {
 			boardHeight = this.getHeight()-2*PADDING;
 			playerWidth = boardWidth*11/160;
 			playerHeight = boardHeight*17/100;
-			
+
 			if(startingLevel){
 				updateCurrentRock(0);
 				startingLevel = !startingLevel;
@@ -268,7 +268,7 @@ public class GameGUI extends JFrame {
 		submit = new JButton("Submit");
 		submit.setActionCommand("Submit");
 		qPanel.add(submit);
-		
+
 		return qPanel;
 	}
 
@@ -342,10 +342,10 @@ public class GameGUI extends JFrame {
 		Question currentQuestion = pickQuestion(gameGUIQuestions);
 		updateQuestionField(currentQuestion);
 		//System.out.println(currentQuestion);
-		
+
 		submit.addActionListener(new questionListener());
 	}
-	
+
 	/**
 	 * The action listener for the Submit button. 
 	 */
@@ -357,7 +357,7 @@ public class GameGUI extends JFrame {
 				return;
 			}
 			String pressed = group.getSelection().getActionCommand();
-			
+
 			if (pressed.equals(answer)){	
 				correct = true;
 				updateAnswerOutcome(correct, answer);
@@ -375,7 +375,7 @@ public class GameGUI extends JFrame {
 			updateStatus();
 		}
 	}
-	
+
 	/**
 	 * Updates the question field to have the question.
 	 * 
@@ -401,10 +401,17 @@ public class GameGUI extends JFrame {
 	 * @param player The player object whose information is displayed. 
 	 */
 	public void updateStatus() {
-		livesDisp.setText(Integer.toString(player.getLivesRemaining()));
+		if (player.getLivesRemaining() == -1){
+			livesDisp.setText(Integer.toString(0));
+		}else{
+			livesDisp.setText(Integer.toString(player.getLivesRemaining()));
+		}
 		if (player.getLivesRemaining() == 0) {
-			JOptionPane.showMessageDialog(getParent(), "Sorry, you have run out of lives!"
-					, "Game Over", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(getParent(), "Sorry, you have run out of lives!", "Game Over", JOptionPane.INFORMATION_MESSAGE);
+			System.exit(0);
+		}
+		if (player.getLivesRemaining() == -1) {
+			JOptionPane.showMessageDialog(getParent(), "Sorry, you have run out of time!", "Game Over", JOptionPane.INFORMATION_MESSAGE);
 			System.exit(0);
 		}
 		repaint();
@@ -427,6 +434,6 @@ public class GameGUI extends JFrame {
 		graphicsPanel.startingLevel = true;
 	}
 
-	
+
 
 }
